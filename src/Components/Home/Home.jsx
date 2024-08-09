@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Home() {
     return (
-        <div className="layout h-screen">
+        <div className="layout ">
 
             Home    </div>)
 }
