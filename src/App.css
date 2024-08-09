@@ -11,3 +11,13 @@
 .activ{
  @apply text-red-500;
 }
+.hero-text{
+  background: #CF810E;
+background: linear-gradient(to right, #CF810E 13%, #C4CF1A 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+
+}
+.hero-about{
+  background: rgb(244,213,75);
+  background: linear-gradient(117deg, rgba(244,213,75,0.29744397759103647) 21%, rgba(242,242,242,1) 49%, rgba(255,195,116,0.48792016806722693) 100%);}

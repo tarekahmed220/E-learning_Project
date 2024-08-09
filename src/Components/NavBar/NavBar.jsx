@@ -11,7 +11,7 @@ export default function NavBar() {
 
     return (
         <>
-            <nav className="bg-[#FFF8D9] border-gray-200 py-2.5 dark:bg-gray-900">
+            <nav className="bg-[#FFF8D9] border-gray-200 py-2.5">
                 <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
 
                     {/* <img
@@ -19,7 +19,7 @@ export default function NavBar() {
                             className="h-11  mr-3 sm:h-9"
                             alt="Landwind Logo"
                         /> */}
-                    <span className="self-center text-amber-700 text-xl font-semibold whitespace-nowrap font-mono dark:text-white">
+                    <span className="self-center text-amber-700 text-xl font-semibold whitespace-nowrap font-mono ">
                         LEARN YOU
                     </span>
 
@@ -28,16 +28,16 @@ export default function NavBar() {
                             <span></span>
                         </div>
 
-                        <NavLink className="active  text-gray-500 hover:bg-slate-300 hover:bg-opacity-25 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-amber-text-amber-500 focus:outline-none dark:focus:ring-purple-800"
+                        <NavLink className="active  text-gray-500 hover:bg-slate-300 hover:bg-opacity-25 focus:ring-4  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 hover:bg-amber-text-amber-500 focus:outline-none "
                             to={"login"} >Login</NavLink>
 
 
-                        <NavLink className="active text-white bg-amber-600 hover:bg-amber-500 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-3 lg:py-2 sm:ml-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-amber-text-amber-500 focus:outline-none dark:focus:ring-purple-800"
+                        <NavLink className="active text-white bg-amber-600 hover:bg-amber-500 focus:ring-4  font-medium rounded-lg text-sm px-4 lg:px-5 py-3 lg:py-2 sm:ml-2 lg:mr-0 hover:bg-amber-text-amber-500 focus:outline-none "
                             to={""}>Register now</NavLink>
 
                         <button
                             onClick={toggleMenu}
-                            className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                            className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200   "
                             aria-controls="mobile-menu-2"
                             aria-expanded={isMenuOpen}
                         >
@@ -63,23 +63,28 @@ export default function NavBar() {
                     >
                         <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                             <li>
-                                <NavLink className="active block py-2 pl-3 pr-4 text-gray-700  rounded   lg:p-0 dark:text-white"
+                                <NavLink className="active block py-2 pl-3 pr-4 text-gray-700  rounded   lg:p-0 "
                                     to={"home"}>Home</NavLink>
 
                             </li>
                             <li>
-                                <NavLink className="active block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-500 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                                <NavLink className="active block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-500 lg:p-0  lg:dar   "
                                     to={"about"}>About Us </NavLink>
 
                             </li>
                             <li>
-                                <NavLink className="active block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-500 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                                <NavLink className="active block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-500 lg:p-0  lg:dar   "
                                     to={"courses"}>Courses</NavLink>
 
                             </li>
                             <li>
-                                <NavLink className="active block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-500 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                                <NavLink className="active block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-500 lg:p-0  lg:dar   "
                                     to={"contact"}>Contact Us</NavLink>
+
+                            </li>
+                            <li>
+                                <NavLink className="active block py-2 pl-3 pr-4 text-amber-700 border-b border-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-800 lg:p-0  lg:dar   "
+                                    to={"mycourses"}>My Courses</NavLink>
 
                             </li>
 
