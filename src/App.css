@@ -2,22 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+html::-webkit-scrollbar {
+  display: none;
+}
+html {
+  scrollbar-width: none;
+}
 
-.layout{
-  background: rgb(255,248,217);
-  background: linear-gradient(117deg, rgba(255,248,217,1) 21%, rgba(242,242,242,1) 64%, rgba(255,244,215,1) 100%);
-        
+.layout {
+  background: rgb(255, 248, 217);
+  background: linear-gradient(
+    117deg,
+    rgba(255, 248, 217, 1) 21%,
+    rgba(242, 242, 242, 1) 64%,
+    rgba(255, 244, 215, 1) 100%
+  );
 }
-.activ{
- @apply text-red-500;
+.activ {
+  @apply text-red-500;
 }
-.hero-text{
-  background: #CF810E;
-background: linear-gradient(to right, #CF810E 13%, #C4CF1A 100%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-
+.hero-text {
+  background: #cf810e;
+  background: linear-gradient(to right, #cf810e 13%, #c4cf1a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.hero-about{
-  background: rgb(244,213,75);
-  background: linear-gradient(117deg, rgba(244,213,75,0.29744397759103647) 21%, rgba(242,242,242,1) 49%, rgba(255,195,116,0.48792016806722693) 100%);}
+.hero-about {
+  background: rgb(244, 213, 75);
+  background: linear-gradient(
+    117deg,
+    rgba(244, 213, 75, 0.29744397759103647) 21%,
+    rgba(242, 242, 242, 1) 49%,
+    rgba(255, 195, 116, 0.48792016806722693) 100%
+  );
+}
