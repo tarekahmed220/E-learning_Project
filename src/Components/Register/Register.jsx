@@ -9,6 +9,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../../firebase-config";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
+import registerImg from "../../assets/register.png";
 
 export default function Register() {
   const fullNameInput = useRef(null);
@@ -322,11 +323,7 @@ export default function Register() {
               <OAuth />
             </form>
             <div className="imgContainer w-full lg:w-[50%]">
-              <img
-                src="../../../src/assets/register.png"
-                alt=""
-                className="w-full"
-              />
+              <img src={registerImg} alt="" className="w-full" />
             </div>
           </div>
         </div>
