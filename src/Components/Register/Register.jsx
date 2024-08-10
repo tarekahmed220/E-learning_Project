@@ -121,7 +121,7 @@ export default function Register() {
       delete formDataCopy.repassword;
       formDataCopy.timestamp = serverTimestamp();
       await setDoc(doc(db, "users", user.uid), formDataCopy);
-      navigate("login");
+      navigate("/login");
     } catch (error) {
       console.log(error.code);
       if (error.code === "auth/user-not-found") {

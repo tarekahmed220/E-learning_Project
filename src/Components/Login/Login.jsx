@@ -68,7 +68,7 @@ export default function Login() {
         password
       );
       if (userCredential.user) {
-        navigate("home");
+        navigate("/home");
       }
     } catch (error) {
       if (error.code === "auth/user-not-found") {
