@@ -11,6 +11,7 @@ import Notfound from "./Components/Notfound/Notfound";
 import MyCourses from "./Components/MyCourses/MyCourses";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
 
 let routers = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ let routers = createBrowserRouter([
       { path: "contact", element: <ContactUs /> },
       { path: "login", element: <Login /> },
       { path: "/register", element: <Register /> },
+      { path: "/forgotpassword", element: <ForgotPassword /> },
       { path: "*", element: <Notfound /> },
     ],
   },
@@ -44,7 +46,7 @@ function App() {
         pauseOnHover
         theme="dark"
       />
-      <RouterProvider router={routers}></RouterProvider>;
+      <RouterProvider router={routers}></RouterProvider>
     </>
   );
 }
