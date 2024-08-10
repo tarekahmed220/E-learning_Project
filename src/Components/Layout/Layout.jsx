@@ -4,7 +4,7 @@ import { Outlet, useLocation } from "react-router-dom";
 
 export default function Layout() {
   const location = useLocation();
-  const noFooterRoutes = ["/login", "/register"];
+  const noFooterRoutes = ["/login", "/register", "/forgotpassword"];
   return (
     <>
       <NavBar />
