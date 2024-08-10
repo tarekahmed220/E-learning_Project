@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Spinner from "../Spinner";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
+import loginImg from "../../assets/Banner-e-learning-concept-vector-design-removebg-preview.png";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [isValid, setIsValid] = useState(false);
@@ -94,10 +95,7 @@ export default function Login() {
     <div className="layout h-[94vh] ">
       <div className="loginContainer relative h-full w-full">
         <div className="img1 absolute md:top-[-25px] md:right-[50%] md:w-auto translate-x-[50%] top-[52px] right-[50%] w-[80%]">
-          <img
-            src="../../../src/assets/Banner-e-learning-concept-vector-design-removebg-preview.png"
-            alt="e-learning-img"
-          />
+          <img src={loginImg} alt="e-learning-img" />
         </div>
         <div className="rounded-md login w-full lg:w-[50%] bg-white p-5 z-10  absolute top-[51%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <h1 className="text-center font-semibold text-4xl font-mono text-[#3d3e5c]">
