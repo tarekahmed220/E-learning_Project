@@ -1,6 +1,5 @@
-import React from 'react';
-
 export default function ContactUs() {
+
     return (
         <div className="layout pb-32">
             <section className="mb-32">
@@ -100,9 +99,15 @@ export default function ContactUs() {
                                 </div>
                             </div>
                         </div>
+
                     </div>
+                  </div>
                 </div>
-            </section>
+              </div>
+            </div>
+          </div>
         </div>
-    );
+      </section>
+    </div>
+  );
 }
