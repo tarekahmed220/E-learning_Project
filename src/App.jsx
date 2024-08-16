@@ -9,9 +9,9 @@ import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import Notfound from "./Components/Notfound/Notfound";
 import MyCourses from "./Components/MyCourses/MyCourses";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
+import { ToastContainer } from "react-toastify";
 
 let routers = createBrowserRouter([
   {
