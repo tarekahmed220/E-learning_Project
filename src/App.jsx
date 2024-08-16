@@ -16,6 +16,11 @@ import PrivateRoute from "./Components/PrivateRoute";
 import { CoursesProvider } from "./Context/CoursesProvider";
 import WishList from "./Components/WishList/WishList";
 
+import CourseDetails from "./Components/ProductDetails/CourseDetails";
+import { store } from "./Redux/store";
+import { Provider } from "react-redux";
+
+
 let routers = createBrowserRouter([
   {
     path: "",
@@ -29,6 +34,9 @@ let routers = createBrowserRouter([
         element: <PrivateRoute />,
         children: [{ path: "", element: <MyCourses /> }],
       },
+
+      { path: "/courses/:id", element: <CourseDetails /> },
+
       {
         path: "mywishlist",
         element: <PrivateRoute />,
@@ -46,21 +54,23 @@ let routers = createBrowserRouter([
 function App() {
   return (
     <>
-      <CoursesProvider>
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-        />
-        <RouterProvider router={routers}></RouterProvider>
-      </CoursesProvider>
+      <Provider store={store}>
+        <CoursesProvider>
+          <ToastContainer
+            position="bottom-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
+          <RouterProvider router={routers}></RouterProvider>
+        </CoursesProvider>
+      </Provider>
     </>
   );
 }

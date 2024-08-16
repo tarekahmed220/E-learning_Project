@@ -4,11 +4,17 @@ import { auth } from "../../firebase-config";
 import { useAuthStatus } from "../../hooks/useAuthStatus";
 import { toast } from "react-toastify";
 
+import { useSelector } from "react-redux";
+
+
 export default function NavBar() {
   const [checklogin, setIsLogin] = useState(false);
   const { loginStatus } = useAuthStatus();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const wishlistLength = useSelector((state) => state.wishlist.wishlist.length);
+
+  const userName = auth.currentUser.displayName.split(" ")[0];
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -66,7 +72,9 @@ export default function NavBar() {
             {checklogin ? (
               <>
                 <p className="text-amber-700 font-medium me-3">
-                  Mohamed Abo Saif{" "}
+
+                  welcome: {userName}
+
                 </p>
                 <div className="profile">
                   <div className="dropdown">
@@ -174,6 +182,11 @@ export default function NavBar() {
                   onClick={checkvalidity}
                 >
                   My Wishlist
+
+                  <span className="text-black-200 font-normal border border-gray-400 rounded-full text-sm inline-block w-[20px] text-center ml-1 ">
+                    {wishlistLength}
+                  </span>
+
                 </NavLink>
               </li>
             </ul>
