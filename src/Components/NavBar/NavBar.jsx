@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Logo from "../../assets/logo.png";
 import { NavLink } from "react-router-dom";
 
 export default function NavBar() {
@@ -34,13 +33,18 @@ export default function NavBar() {
 
                         <NavLink className="active text-white bg-amber-600 hover:bg-amber-500 focus:ring-4  font-medium rounded-lg text-sm px-4 lg:px-5 py-3 lg:py-2 sm:ml-2 lg:mr-0 hover:bg-amber-text-amber-500 focus:outline-none "
                             to={""}>Register now</NavLink> */}
-            <p className='text-amber-700 font-medium me-3'>Mohamed Abo Saif </p>
+            <p className="text-amber-700 font-medium me-3">Mohamed Abo Saif </p>
             <div className="profile">
-
-              <div class="dropdown">
-                <button class="dropbtn">                            <img class="inline-block w-8 h-8 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""></img>
+              <div className="dropdown">
+                <button className="dropbtn">
+                  {" "}
+                  <img
+                    className="inline-block w-8 h-8 rounded-full ring-2 ring-white"
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    alt=""
+                  ></img>
                 </button>
-                <div class="dropdown-content">
+                <div className="dropdown-content">
                   <a href="#">Edit Profile</a>
                   <a href="#">Logout</a>
                 </div>
@@ -61,15 +65,22 @@ export default function NavBar() {
               >
                 <path
                   fillRule="evenodd"
-                  d={`M3 ${isMenuOpen ? '10' : '5'}a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${isMenuOpen ? '5' : '10'}a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${isMenuOpen ? '15' : '10'}a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z`}
+                  d={`M3 ${
+                    isMenuOpen ? "10" : "5"
+                  }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${
+                    isMenuOpen ? "5" : "10"
+                  }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${
+                    isMenuOpen ? "15" : "10"
+                  }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z`}
                   clipRule="evenodd"
                 />
               </svg>
             </button>
           </div>
           <div
-            className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${isMenuOpen ? '' : 'hidden'
-              }`}
+            className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${
+              isMenuOpen ? "" : "hidden"
+            }`}
             id="mobile-menu-2"
           >
             {/* <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
@@ -88,7 +99,6 @@ export default function NavBar() {
                                     to={"courses"}>Courses</NavLink>
                                      */}
 
-
             <div className="flex items-center lg:order-2">
               <div className="hidden mt-2 mr-4 sm:inline-block">
                 <span></span>
@@ -102,7 +112,6 @@ export default function NavBar() {
             </NavLink> */}
               {/* 
                             </li> */}
-
 
               <button
                 onClick={toggleMenu}
@@ -119,18 +128,22 @@ export default function NavBar() {
                 >
                   <path
                     fillRule="evenodd"
-                    d={`M3 ${isMenuOpen ? "10" : "5"
-                      }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${isMenuOpen ? "5" : "10"
-                      }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${isMenuOpen ? "15" : "10"
-                      }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z`}
+                    d={`M3 ${
+                      isMenuOpen ? "10" : "5"
+                    }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${
+                      isMenuOpen ? "5" : "10"
+                    }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${
+                      isMenuOpen ? "15" : "10"
+                    }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z`}
                     clipRule="evenodd"
                   />
                 </svg>
               </button>
             </div>
             <div
-              className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${isMenuOpen ? "" : "hidden"
-                }`}
+              className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${
+                isMenuOpen ? "" : "hidden"
+              }`}
               id="mobile-menu-2"
             >
               <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
@@ -175,15 +188,18 @@ export default function NavBar() {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="active block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-800 lg:p-0  lg:dar   "
-                    to={"mycourses"}>My Wishlist</NavLink>
-
+                  <NavLink
+                    className="active block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-800 lg:p-0  lg:dar   "
+                    to={"mycourses"}
+                  >
+                    My Wishlist
+                  </NavLink>
                 </li>
               </ul>
             </div>
           </div>
-
-        </div>      </nav>
+        </div>{" "}
+      </nav>
     </>
   );
 }

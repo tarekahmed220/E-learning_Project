@@ -12,6 +12,7 @@ import MyCourses from "./Components/MyCourses/MyCourses";
 import "react-toastify/dist/ReactToastify.css";
 import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
 import { ToastContainer } from "react-toastify";
+import Profile from "./Components/Profile/Profile";
 
 let routers = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ let routers = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "/register", element: <Register /> },
       { path: "/forgotpassword", element: <ForgotPassword /> },
+      { path: "profile", element: <Profile /> },
       { path: "*", element: <Notfound /> },
     ],
   },
