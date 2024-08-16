@@ -101,13 +101,8 @@ export default function ContactUs() {
                         </div>
 
                     </div>
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
+            </section>
         </div>
-      </section>
-    </div>
-  );
+    );
 }
