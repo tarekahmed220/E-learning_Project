@@ -28,13 +28,24 @@ export default function NavBar() {
                             <span></span>
                         </div>
 
-                        <NavLink className="active  text-gray-500 hover:bg-slate-300 hover:bg-opacity-25 focus:ring-4  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 hover:bg-amber-text-amber-500 focus:outline-none "
+                        {/* <NavLink className="active  text-gray-500 hover:bg-slate-300 hover:bg-opacity-25 focus:ring-4  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 hover:bg-amber-text-amber-500 focus:outline-none "
                             to={"login"} >Login</NavLink>
 
 
                         <NavLink className="active text-white bg-amber-600 hover:bg-amber-500 focus:ring-4  font-medium rounded-lg text-sm px-4 lg:px-5 py-3 lg:py-2 sm:ml-2 lg:mr-0 hover:bg-amber-text-amber-500 focus:outline-none "
-                            to={""}>Register now</NavLink>
+                            to={""}>Register now</NavLink> */}
+                        <p className='text-amber-700 font-medium me-3'>Mohamed Abo Saif </p>
+                        <div className="profile">
 
+                            <div class="dropdown">
+                                <button class="dropbtn">                            <img class="inline-block w-8 h-8 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""></img>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a href="#">Edit Profile</a>
+                                    <a href="#">Logout</a>
+                                </div>
+                            </div>
+                        </div>
                         <button
                             onClick={toggleMenu}
                             className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200   "
@@ -85,6 +96,11 @@ export default function NavBar() {
                             <li>
                                 <NavLink className="active block py-2 pl-3 pr-4 text-amber-700 border-b border-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-800 lg:p-0  lg:dar   "
                                     to={"mycourses"}>My Courses</NavLink>
+
+                            </li>
+                            <li>
+                                <NavLink className="active block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-800 lg:p-0  lg:dar   "
+                                    to={"mycourses"}>My Wishlist</NavLink>
 
                             </li>
 

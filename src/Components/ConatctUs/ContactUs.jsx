@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function ContactUs() {
     return (
-        <div className="layout h-screen">
+        <div className="layout pb-32">
             <section className="mb-32">
                 <div id="map" className="relative h-[300px] overflow-hidden bg-cover bg-[50%] bg-no-repeat">
                     <iframe

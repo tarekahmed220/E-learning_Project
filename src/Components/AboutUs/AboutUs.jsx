@@ -5,7 +5,7 @@ import student from "../../assets/e-learn.webp"
 export default function AboutUs() {
     return (
         <>
-            <div className="layout w-screen py-8">
+            <div className="layout  py-8">
                 <div className="about container w-5/6 mx-auto">
                     <div className="hero-about rounded-lg md:flex">
                         <div className="left w-full lg:w-2/3">
