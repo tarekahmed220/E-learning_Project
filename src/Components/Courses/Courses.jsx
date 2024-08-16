@@ -1,122 +1,130 @@
-import React from 'react'
+import {
+  collection,
+  getDocs,
+  limit,
+  query,
+  startAfter,
+} from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { db } from "../../firebase-config";
+import CourseItem from "./CourseItem";
+import Spinner from "../Spinner";
 
 export default function Courses() {
-    return (
-        <div className="layout w-full pb-24">
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [lastVisible, setLastVisible] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searching, setSearching] = useState(false);
+  useEffect(() => {
+    fetchCourses();
+  }, []);
 
+  async function fetchCourses() {
+    setLoading(true);
+    try {
+      const coursesCollection = collection(db, "courses");
+      let q = query(coursesCollection, limit(20));
+      const querySnapshot = await getDocs(q);
 
-            <div className="text-center p-10">
-                <h1 className="font-bold text-4xl mb-4">All Courses</h1>
-            </div>
+      const coursesList = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
 
-            <section id="Projects"
-                className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-12 gap-x-9 mt-10 mb-5">
+      const filteredCourses = coursesList.filter((course) =>
+        course.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
 
-                <div className="w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+      const lastVisibleDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+      setLastVisible(lastVisibleDoc);
 
-                    <div className="project-img relative ">
-                        <img src="https://img-b.udemycdn.com/course/240x135/437398_46c3_10.jpg"
-                            alt="Course" className="h-80 w-80 object-cover rounded-t-xl" />
-                        <div className="fav-icon absolute top-2 right-3 w-11 h-11 rounded-full flex justify-center items-center text-lg text-black bg-white bg-opacity-40 hover:text-red-600 hover:bg-slate-300 hover:bg-opacity-50 ">
-                            <i class="fa-solid fa-heart"></i>
+      setCourses(filteredCourses);
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+    } finally {
+      setLoading(false);
+      setSearching(false);
+    }
+  }
 
+  const loadMoreCourses = async () => {
+    if (!lastVisible) return;
+    setLoading(true);
+    try {
+      const coursesCollection = collection(db, "courses");
+      const q = query(coursesCollection, startAfter(lastVisible), limit(20));
+      const querySnapshot = await getDocs(q);
 
-                        </div>
+      const coursesList = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
 
-                    </div>
-                    <div className="px-4 py-3 w-80">
-                        <span className="text-gray-400 mr-3 uppercase text-xs">Categoryyy</span>
-                        <p className="text-lg font-bold text-black truncate block capitalize">Course Name</p>
-                        <div className="flex items-center">
-                            <p className='text-green-500'>Free</p>
+      const filteredCourses = coursesList.filter((course) =>
+        course.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
 
-                            <div className="ml-auto">                                    <button className='py-1 px-2 text-white bg-amber-600 hover:bg-amber-700 text-sm font-medium rounded-md'>Enroll</button>
-                            </div>
-                        </div>
-                    </div>
+      const lastVisibleDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+      setLastVisible(lastVisibleDoc);
 
-                </div>
+      setCourses((prevCourses) => [...prevCourses, ...filteredCourses]);
+    } catch (error) {
+      console.error("Error fetching more courses:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-                <div className="w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+  const handleSearch = (event) => {
+    const value = event.target.value.replace(/[^a-zA-Z\s]/g, "");
+    setSearchTerm(value);
+  };
 
-                    <div className="project-img relative ">
-                        <img src="https://img-b.udemycdn.com/course/240x135/437398_46c3_10.jpg"
-                            alt="Course" className="h-80 w-80 object-cover rounded-t-xl" />
-                        <div className="fav-icon absolute top-2 right-3 w-11 h-11 rounded-full flex justify-center items-center text-lg text-black bg-white bg-opacity-40 hover:text-red-600 hover:bg-slate-300 hover:bg-opacity-50 ">
-                            <i class="fa-solid fa-heart"></i>
+  const handleSearchClick = () => {
+    setSearching(true);
+    fetchCourses();
+  };
 
+  return (
+    <div className="layout w-full pb-24">
+      <div className="text-center p-10">
+        <h1 className="font-bold text-4xl mb-4">All Courses</h1>
+        <div className="flex justify-center space-x-2">
+          <input
+            type="text"
+            placeholder="Search for courses..."
+            value={searchTerm}
+            onChange={handleSearch}
+            pattern="[A-Za-z\s]*"
+            className="p-2 border border-gray-300 rounded-lg"
+          />
+          <button
+            onClick={handleSearchClick}
+            className="px-4 py-2 bg-[#d97706] hover:bg-[#d97706d7] transition ease-in-out text-white rounded"
+          >
+            Search
+          </button>
+        </div>
+      </div>
 
-                        </div>
-
-                    </div>
-                    <div className="px-4 py-3 w-80">
-                        <span className="text-gray-400 mr-3 uppercase text-xs">Category</span>
-                        <p className="text-lg font-bold text-black truncate block capitalize">Course Name</p>
-                        <div className="flex items-center">
-                            <p className='text-green-500'>Free</p>
-
-                            <div className="ml-auto">                                    <button className='py-1 px-2 text-white bg-amber-600 hover:bg-amber-700 text-sm font-medium rounded-md'>Enroll</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div className="w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-
-                    <img src="https://img-b.udemycdn.com/course/240x135/947098_02ec_2.jpg"
-                        alt="Course" className="h-80 w-80 object-cover rounded-t-xl" />
-                    <div className="px-4 py-3 w-80">
-                        <span className="text-gray-400 mr-3 uppercase text-xs">Category</span>
-                        <p className="text-lg font-bold text-black truncate block capitalize">Course Name</p>
-                        <div className="flex items-center">
-                            <p className='text-green-500'>Free</p>
-                            <div className="ml-auto">                                    <button className='py-1 px-2 text-white bg-amber-600 hover:bg-amber-700 text-sm font-medium rounded-md'>Enroll</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className="w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-
-                    <img src="https://img-b.udemycdn.com/course/240x135/822444_a6db.jpg"
-                        alt="Course" className="h-80 w-80 object-cover rounded-t-xl" />
-                    <div className="px-4 py-3 w-80">
-                        <span className="text-gray-400 mr-3 uppercase text-xs">Category</span>
-                        <p className="text-lg font-bold text-black truncate block capitalize">Course Name</p>
-                        <div className="flex items-center">
-                            <p className='text-green-500'>Free</p>
-
-                            <div className="ml-auto">                                    <button className='py-1 px-2 text-white bg-amber-600 hover:bg-amber-700 text-sm font-medium rounded-md'>Enroll</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div className="w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-
-                    <img src="https://img-b.udemycdn.com/course/240x135/1463348_52a4_4.jpg"
-                        alt="Course" className="h-80 w-80 object-cover rounded-t-xl" />
-                    <div className="px-4 py-3 w-80">
-                        <span className="text-gray-400 mr-3 uppercase text-xs">Category</span>
-                        <p className="text-lg font-bold text-black truncate block capitalize">Course Name</p>
-                        <div className="flex items-center">
-                            <p className='text-green-500'>Free</p>
-
-                            <div className="ml-auto">                                    <button className='py-1 px-2 text-white bg-amber-600 hover:bg-amber-700 text-sm font-medium rounded-md'>Enroll</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-
-            </section>
-
-
-
-
-        </div>)
+      <section
+        id="Projects"
+        className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-12 gap-x-9 mt-10 mb-5"
+      >
+        {courses.map((course) => (
+          <CourseItem course={course} key={course.id} />
+        ))}
+      </section>
+      <div className="flex justify-center">
+        <button
+          onClick={loadMoreCourses}
+          disabled={loading || searching}
+          className="mt-4 px-4 py-2 bg-[#d97706] hover:bg-[#d97706d7] transition ease-in-out text-white rounded mx-auto"
+        >
+          {loading ? <Spinner /> : "Load More"}
+        </button>
+      </div>
+    </div>
+  );
 }

@@ -1,4 +1,3 @@
-
 import ButtonComponent from "./Components/buttonComponent";
 import "./home.css";
 
@@ -77,9 +76,11 @@ export default function Home() {
             </p>
             <div className="grid lg:grid-cols-4 grid-cols-2 gap-3 m-auto">
 
+
               <div
                 className="w-[90%] bg-white p-3 flex gap-3 items-center"
               >
+
                 <img
                   className="w-14"
                   src="https://static.vecteezy.com/system/resources/previews/013/313/458/non_2x/html-icon-3d-rendering-illustration-vector.jpg"
@@ -92,9 +93,11 @@ export default function Home() {
                   </span>
                 </div>
               </div>
+
               <div
                 className="w-[90%] bg-white p-3 flex gap-3 items-center"
               >
+
                 <img
                   className="w-14"
                   src="https://opensource.google/images/projects/os-projects-flutter_thumbnail.png"
@@ -106,9 +109,11 @@ export default function Home() {
                     250+ course availble
                   </span>
                 </div>
+
               </div> <div
                 className="w-[90%] bg-white p-3 flex gap-3 items-center"
               >
+
                 <img
                   className="w-14"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuo_NsNG-dZ7fA1qtHYzFEnxHbiVFH16VLkA&s"
@@ -120,9 +125,11 @@ export default function Home() {
                     250+ course availble
                   </span>
                 </div>
+
               </div> <div
                 className="w-[90%] bg-white p-3 flex gap-3 items-center"
               >
+
                 <img
                   className="w-14"
                   src="https://149848395.v2.pressablecdn.com/wp-content/uploads/2022/01/adobe-illustrator-versus-photoshop-differences.jpg"
@@ -134,9 +141,11 @@ export default function Home() {
                     250+ course availble
                   </span>
                 </div>
+
               </div> <div
                 className="w-[90%] bg-white p-3 flex gap-3 items-center"
               >
+
                 <img
                   className="w-14"
                   src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=600/uploads/users/16/courses/578/preview_image/introduction-to-video-editing-in-adobe-premiere-pro-400x277.png"
@@ -149,9 +158,11 @@ export default function Home() {
                   </span>
                 </div>
               </div>
+
               <div
                 className="w-[90%] bg-white p-3 flex gap-3 items-center"
               >
+
                 <img
                   className="w-14"
                   src="https://spin.atomicobject.com/wp-content/uploads/Figma-Image.jpg"
@@ -164,6 +175,8 @@ export default function Home() {
                   </span>
                 </div>
               </div>
+
+
 
             </div>
           </div>
@@ -178,11 +191,13 @@ export default function Home() {
               <h3 className="text-3xl my-5 font-bold">Our Trusted Companies</h3>
             </div>
             <div className=" w-3/4  flex flex-col lg:flex-row justify-center items-center gap-8 lg:justify-between">
+
               <img className="w-1/2 lg:w-1/6 " src="https://1000logos.net/wp-content/uploads/2017/06/Vodafone_Logo.png" alt="" />
               <img className="w-1/2 lg:w-1/6 " src="https://images.crunchbase.com/image/upload/c_pad,f_auto,q_auto:eco,dpr_1/uabuaawthxuohcgzudmb" alt="" />
               <img className="w-1/2 lg:w-1/6 " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx2GwSnpGTvFJQO41gc683FZyPgeNGCt2xdg&s" alt="" />
               <img className="w-1/2 lg:w-1/6 " src="https://logos-world.net/wp-content/uploads/2021/11/Udemy-Logo.png" alt="" />
               <img className="w-1/2 lg:w-1/6 " src="https://media.licdn.com/dms/image/v2/C560BAQGK3uuhQer46g/company-logo_200_200/company-logo_200_200/0/1631351788797?e=2147483647&v=beta&t=oGL-yHbzSy8MbCU-d4CfsELlfgQP3KX_fm5F6wcaGxA" alt="" />
+
             </div>
           </div>
         </section>
@@ -237,7 +252,6 @@ export default function Home() {
                         <span className="block w-[25px] h-[25px] bg-[#FDF2D6] rounded-full"></span>
                         <span>4.8</span>
                       </div>
-
 
                     </div>
                   </div>
@@ -323,7 +337,9 @@ export default function Home() {
               </div>
               <div>
 
+
                 <iframe className="mt-5" width="560" height="315" src="https://www.youtube.com/embed/gHXSwOTuseA?si=QzeHE1sJiGyL37f0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
               </div>
             </div>
             <div className="grid grid-cols-3 gap-3 my-8">
@@ -380,6 +396,7 @@ export default function Home() {
               provident.
             </p>
             <div className="flex justify-center gap-7 my-12">
+
               <img className="w-1/4 rounded-2xl" src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/453011807_7875030812584727_2924410436610947275_n.jpg?stp=cp6_dst-jpg&_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=sWQeVJ2VejkQ7kNvgE4v1-g&_nc_ht=scontent-hbe1-1.xx&oh=00_AYA4cUlRFNagZCItkwhMjX49cVBgbcHLfXkmoZIZWMtrtg&oe=66C4E9B7"
               />
               <img className="w-1/4 rounded-2xl"
@@ -387,6 +404,7 @@ export default function Home() {
 
               />
               <img className="w-1/4 rounded-2xl" src="../../../public/me.jpg" alt="" />
+
             </div>
             <div className="my-8">
               <ButtonComponent
