@@ -15,9 +15,11 @@ import { ToastContainer } from "react-toastify";
 import PrivateRoute from "./Components/PrivateRoute";
 import { CoursesProvider } from "./Context/CoursesProvider";
 import WishList from "./Components/WishList/WishList";
+
 import CourseDetails from "./Components/ProductDetails/CourseDetails";
 import { store } from "./Redux/store";
 import { Provider } from "react-redux";
+
 
 let routers = createBrowserRouter([
   {
@@ -32,7 +34,9 @@ let routers = createBrowserRouter([
         element: <PrivateRoute />,
         children: [{ path: "", element: <MyCourses /> }],
       },
+
       { path: "/courses/:id", element: <CourseDetails /> },
+
       {
         path: "mywishlist",
         element: <PrivateRoute />,

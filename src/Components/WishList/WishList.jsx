@@ -1,3 +1,4 @@
+
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromWishlist } from "../../Redux/wishlistSlice";
 import { Link } from "react-router-dom";
@@ -50,6 +51,7 @@ function WishList() {
       )}
     </div>
   );
+
 }
 
 export default WishList;
