@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
@@ -5,6 +6,7 @@ import { useAuthStatus } from "../../hooks/useAuthStatus";
 import { toast } from "react-toastify";
 
 import { useSelector } from "react-redux";
+
 
 
 export default function NavBar() {
@@ -101,6 +103,7 @@ export default function NavBar() {
                   Login
                 </NavLink>
 
+
                 <NavLink
                   className="text-white bg-amber-600 hover:bg-amber-500 focus:ring-4 font-medium rounded-lg text-sm px-4 lg:px-5 py-3 lg:py-2 sm:ml-2 lg:mr-0 hover:bg-amber-text-amber-500 focus:outline-none"
                   to="register"
@@ -109,7 +112,6 @@ export default function NavBar() {
                 </NavLink>
               </>
             )}
-
             <button
               onClick={toggleMenu}
               className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
@@ -125,16 +127,19 @@ export default function NavBar() {
               >
                 <path
                   fillRule="evenodd"
+
                   d={`M3 ${isMenuOpen ? "10" : "5"
                     }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${isMenuOpen ? "5" : "10"
                     }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${isMenuOpen ? "15" : "10"
                     }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z`}
+
                   clipRule="evenodd"
                 />
               </svg>
             </button>
           </div>
           <div
+
             className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${isMenuOpen ? "" : "hidden"
               }`}
             id="mobile-menu-2"
