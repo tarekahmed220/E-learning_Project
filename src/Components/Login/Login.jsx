@@ -9,7 +9,9 @@ import Spinner from "../Spinner";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
 import loginImg from "../../assets/Banner-e-learning-concept-vector-design-removebg-preview.png";
+import { useCoursesContext } from "../../Context/CoursesProvider";
 export default function Login() {
+  const { loginStatus } = useCoursesContext();
   const [showPassword, setShowPassword] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -57,7 +59,7 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
+    console.log(loginStatus);
     if (!email || !password) {
       toast.error("Please fill in all fields.");
       return;
@@ -69,6 +71,7 @@ export default function Login() {
         password
       );
       if (userCredential.user) {
+        localStorage.setItem("isLoggedIn", "true");
         navigate("/home");
       }
     } catch (error) {
