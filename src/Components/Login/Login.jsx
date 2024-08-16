@@ -72,7 +72,7 @@ export default function Login() {
       );
       if (userCredential.user) {
         localStorage.setItem("isLoggedIn", "true");
-        navigate("/home");
+        navigate("/");
       }
     } catch (error) {
       if (error.code === "auth/user-not-found") {
@@ -157,9 +157,8 @@ export default function Login() {
             <button
               type="submit"
               disabled={!isValid}
-              className={`mt-3 bg-[#d3a058] hover:bg-[#d3a058da] py-2 px-7 rounded-md text-white font-semibold ${
-                !isValid ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+              className={`mt-3 bg-[#d3a058] hover:bg-[#d3a058da] py-2 px-7 rounded-md text-white font-semibold ${!isValid ? "opacity-50 cursor-not-allowed" : ""
+                }`}
             >
               Login
             </button>

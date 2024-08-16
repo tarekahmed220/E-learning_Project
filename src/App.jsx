@@ -15,6 +15,9 @@ import { ToastContainer } from "react-toastify";
 import PrivateRoute from "./Components/PrivateRoute";
 import { CoursesProvider } from "./Context/CoursesProvider";
 import WishList from "./Components/WishList/WishList";
+import Admin from "./Admin/Components/AdminPage/Admin";
+import UpdateCourse from "./Admin/Components/UpdateCourse/UpdateCourse";
+import AddCourse from "./Admin/Components/AddCourse/AddCourse";
 
 import CourseDetails from "./Components/ProductDetails/CourseDetails";
 import { store } from "./Redux/store";
@@ -26,7 +29,7 @@ let routers = createBrowserRouter([
     path: "",
     element: <Layout />,
     children: [
-      { path: "home", element: <Home /> },
+      { index: true, element: <Home /> },
       { path: "about", element: <AboutUs /> },
       { path: "courses", element: <Courses /> },
       {
@@ -47,7 +50,20 @@ let routers = createBrowserRouter([
       { path: "/register", element: <Register /> },
       { path: "/forgotpassword", element: <ForgotPassword /> },
       { path: "*", element: <Notfound /> },
+      // { path: "create", element: <CreateCourse /> },
+
     ],
+
+  },
+  {
+    path: "admin", element: <Admin />,
+
+    children: [
+      { path: "updatecourse", element: <UpdateCourse /> },
+      { path: "addcourse", element: <AddCourse /> },
+
+
+    ]
   },
 ]);
 
