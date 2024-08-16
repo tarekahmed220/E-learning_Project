@@ -39,10 +39,8 @@ export default function NavBar() {
 
   // تابع للتحقق من المسار النشط
   const getLinkClassName = ({ isActive }) =>
-    `block py-2 pl-3 pr-4 rounded lg:p-0 ${
-      isActive ? "text-amber-700" : "text-gray-700"
-    } ${isActive ? "" : "hover:bg-gray-50"} ${
-      isActive ? "" : "border-b border-gray-100"
+    `block py-2 pl-3 pr-4 rounded lg:p-0 ${isActive ? "text-amber-700" : "text-gray-700"
+    } ${isActive ? "" : "hover:bg-gray-50"} ${isActive ? "" : "border-b border-gray-100"
     } lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-500 lg:p-0 lg:dar`;
 
   function checkvalidity() {
@@ -119,27 +117,23 @@ export default function NavBar() {
               >
                 <path
                   fillRule="evenodd"
-                  d={`M3 ${
-                    isMenuOpen ? "10" : "5"
-                  }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${
-                    isMenuOpen ? "5" : "10"
-                  }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${
-                    isMenuOpen ? "15" : "10"
-                  }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z`}
+                  d={`M3 ${isMenuOpen ? "10" : "5"
+                    }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${isMenuOpen ? "5" : "10"
+                    }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${isMenuOpen ? "15" : "10"
+                    }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z`}
                   clipRule="evenodd"
                 />
               </svg>
             </button>
           </div>
           <div
-            className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${
-              isMenuOpen ? "" : "hidden"
-            }`}
+            className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${isMenuOpen ? "" : "hidden"
+              }`}
             id="mobile-menu-2"
           >
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               <li>
-                <NavLink className={getLinkClassName} to="home">
+                <NavLink className={getLinkClassName} to="">
                   Home
                 </NavLink>
               </li>
