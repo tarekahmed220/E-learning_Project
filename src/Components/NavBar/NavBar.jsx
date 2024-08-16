@@ -1,24 +1,65 @@
-import { useState } from "react";
-import Logo from "../../assets/logo.png";
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { auth } from "../../firebase-config";
+import { useAuthStatus } from "../../hooks/useAuthStatus";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 export default function NavBar() {
+  const [checklogin, setIsLogin] = useState(false);
+  const { loginStatus } = useAuthStatus();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const wishlistLength = useSelector((state) => state.wishlist.wishlist.length);
+
+  const userName = auth.currentUser.displayName.split(" ")[0];
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  function onLogout() {
+    auth.signOut().then(() => {
+      setIsLogin(false);
+      localStorage.removeItem("isLoggedIn");
+      navigate("/login");
+    });
+  }
+
+  useEffect(() => {
+    const storedLoginStatus = localStorage.getItem("isLoggedIn");
+    if (storedLoginStatus) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(loginStatus);
+    }
+  }, [loginStatus]);
+
+  useEffect(() => {
+    if (checklogin) {
+      localStorage.setItem("isLoggedIn", "true");
+    }
+  }, [checklogin]);
+
+  // تابع للتحقق من المسار النشط
+  const getLinkClassName = ({ isActive }) =>
+    `block py-2 pl-3 pr-4 rounded lg:p-0 ${
+      isActive ? "text-amber-700" : "text-gray-700"
+    } ${isActive ? "" : "hover:bg-gray-50"} ${
+      isActive ? "" : "border-b border-gray-100"
+    } lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-500 lg:p-0 lg:dar`;
+
+  function checkvalidity() {
+    if (!loginStatus) {
+      toast.error("please login first");
+    }
+  }
+
   return (
     <>
       <nav className="bg-[#FFF8D9] border-gray-200 py-2.5">
         <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
-          {/* <img
-                            src={Logo} width={120}
-                            className="h-11  mr-3 sm:h-9"
-                            alt="Landwind Logo"
-                        /> */}
-          <span className="self-center text-amber-700 text-xl font-semibold whitespace-nowrap font-mono ">
+          <span className="self-center text-amber-700 text-xl font-semibold whitespace-nowrap font-mono">
             LEARN YOU
           </span>
 
@@ -26,24 +67,50 @@ export default function NavBar() {
             <div className="hidden mt-2 mr-4 sm:inline-block">
               <span></span>
             </div>
+            {checklogin ? (
+              <>
+                <p className="text-amber-700 font-medium me-3">
+                  welcome: {userName}
+                </p>
+                <div className="profile">
+                  <div className="dropdown">
+                    <button className="dropbtn">
+                      <img
+                        className="inline-block w-8 h-8 rounded-full ring-2 ring-white"
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        alt=""
+                      />
+                    </button>
+                    <div className="dropdown-content">
+                      <a href="#">Edit Profile</a>
+                      <a className="cursor-pointer" onClick={onLogout}>
+                        Logout
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <NavLink
+                  className="text-gray-500 hover:bg-slate-300 hover:bg-opacity-25 focus:ring-4 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 hover:bg-amber-text-amber-500 focus:outline-none"
+                  to="login"
+                >
+                  Login
+                </NavLink>
 
-            <NavLink
-              className="active  text-gray-500 hover:bg-slate-300 hover:bg-opacity-25 focus:ring-4  font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 hover:bg-amber-text-amber-500 focus:outline-none "
-              to={"login"}
-            >
-              Login
-            </NavLink>
-
-            <NavLink
-              className="active text-white bg-amber-600 hover:bg-amber-500 focus:ring-4  font-medium rounded-lg text-sm px-4 lg:px-5 py-3 lg:py-2 sm:ml-2 lg:mr-0 hover:bg-amber-text-amber-500 focus:outline-none "
-              to="register"
-            >
-              Register now
-            </NavLink>
+                <NavLink
+                  className="text-white bg-amber-600 hover:bg-amber-500 focus:ring-4 font-medium rounded-lg text-sm px-4 lg:px-5 py-3 lg:py-2 sm:ml-2 lg:mr-0 hover:bg-amber-text-amber-500 focus:outline-none"
+                  to="register"
+                >
+                  Register now
+                </NavLink>
+              </>
+            )}
 
             <button
               onClick={toggleMenu}
-              className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200   "
+              className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
               aria-controls="mobile-menu-2"
               aria-expanded={isMenuOpen}
             >
@@ -76,43 +143,44 @@ export default function NavBar() {
           >
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               <li>
-                <NavLink
-                  className="active block py-2 pl-3 pr-4 text-gray-700  rounded   lg:p-0 "
-                  to={"home"}
-                >
+                <NavLink className={getLinkClassName} to="home">
                   Home
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  className="active block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-500 lg:p-0  lg:dar   "
-                  to={"about"}
-                >
-                  About Us{" "}
+                <NavLink className={getLinkClassName} to="about">
+                  About Us
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  className="active block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-500 lg:p-0  lg:dar   "
-                  to={"courses"}
-                >
+                <NavLink className={getLinkClassName} to="courses">
                   Courses
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  className="active block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-500 lg:p-0  lg:dar   "
-                  to={"contact"}
-                >
+                <NavLink className={getLinkClassName} to="contact">
                   Contact Us
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  className="active block py-2 pl-3 pr-4 text-amber-700 border-b border-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-800 lg:p-0  lg:dar   "
-                  to={"mycourses"}
+                  className={getLinkClassName}
+                  to="mycourses"
+                  onClick={checkvalidity}
                 >
                   My Courses
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={getLinkClassName}
+                  to="mywishlist"
+                  onClick={checkvalidity}
+                >
+                  My Wishlist
+                  <span className="text-black-200 font-normal border border-gray-400 rounded-full text-sm inline-block w-[20px] text-center ml-1 ">
+                    {wishlistLength}
+                  </span>
                 </NavLink>
               </li>
             </ul>
