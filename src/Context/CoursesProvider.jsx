@@ -1,13 +1,23 @@
-import { createContext } from "react";
+import { createContext, useContext, useState } from "react";
+
+const CoursesContext = createContext();
 
 function CoursesProvider({ children }) {
-  // const [courses, setCourses] = useState(() => {});
+  const [loginStatus, setLoginStatus] = useState(false);
 
-  const coursesContext = createContext();
-
-  return <coursesContext.Provider>{children}</coursesContext.Provider>;
+  return (
+    <CoursesContext.Provider value={{ loginStatus, setLoginStatus }}>
+      {children}
+    </CoursesContext.Provider>
+  );
 }
 
-export default CoursesProvider;
+function useCoursesContext() {
+  const context = useContext(CoursesContext);
+  if (context === undefined) {
+    throw new Error("useCoursesContext must be used within a CoursesProvider");
+  }
+  return context;
+}
 
-// https://www.udemy.com/api-2.0/courses/?page=1&page_size=10&language=en&category=development
+export { CoursesProvider, useCoursesContext };

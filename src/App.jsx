@@ -9,9 +9,12 @@ import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import Notfound from "./Components/Notfound/Notfound";
 import MyCourses from "./Components/MyCourses/MyCourses";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
+import { ToastContainer } from "react-toastify";
+import PrivateRoute from "./Components/PrivateRoute";
+import { CoursesProvider } from "./Context/CoursesProvider";
+import WishList from "./Components/WishList/WishList";
 
 let routers = createBrowserRouter([
   {
@@ -21,7 +24,16 @@ let routers = createBrowserRouter([
       { path: "home", element: <Home /> },
       { path: "about", element: <AboutUs /> },
       { path: "courses", element: <Courses /> },
-      { path: "mycourses", element: <MyCourses /> },
+      {
+        path: "mycourses",
+        element: <PrivateRoute />,
+        children: [{ path: "", element: <MyCourses /> }],
+      },
+      {
+        path: "mywishlist",
+        element: <PrivateRoute />,
+        children: [{ path: "", element: <WishList /> }],
+      },
       { path: "contact", element: <ContactUs /> },
       { path: "login", element: <Login /> },
       { path: "/register", element: <Register /> },
@@ -34,19 +46,21 @@ let routers = createBrowserRouter([
 function App() {
   return (
     <>
-      <ToastContainer
-        position="bottom-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
-      <RouterProvider router={routers}></RouterProvider>
+      <CoursesProvider>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+        <RouterProvider router={routers}></RouterProvider>
+      </CoursesProvider>
     </>
   );
 }
