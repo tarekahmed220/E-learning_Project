@@ -1,4 +1,3 @@
-
 import ButtonComponent from "./Components/buttonComponent";
 import "./home.css";
 
@@ -6,11 +5,11 @@ export default function Home() {
   const items = Array.from({ length: 6 });
 
   return (
-    <div className="h-screen">
+    <div className="">
       <div className="">
         {/* header */}
         <header className="layout py-16">
-          <div className="w-1/3 text-center m-auto">
+          <div className="lg:w-1/3 w-3/4  text-center m-auto">
             <h2 className="text-4xl font-bold text-[--colorOrange]">
               Find Your Perfect Learn Platform
             </h2>
@@ -31,29 +30,29 @@ export default function Home() {
 
         {/* section details */}
         <section className="py-7 bg-[--colorBgNumbers]">
-          <div className="parent w-3/4 m-auto px-10 flex justify-between items-center">
-            <div className="flex flex-col">
+          <div className="parent  w-3/4 m-auto px-10 flex lg:flex-row flex-col justify-between items-center">
+            <div className="flex flex-col justify-center items-center">
               <span className="text-[--colorOrange] font-bold text-2xl">
                 10K+
               </span>
               <span>TOTAL COURSES</span>
             </div>
-            <span className="w-px h-14 bg-[--colorOrange]"></span>
-            <div className="flex flex-col">
+            <span className="lg:w-px lg:h-14 h-px w-36 mt-4 mb-5 bg-[--colorOrange]"></span>
+            <div className="flex flex-col justify-center items-center ">
               <span className="text-[--colorOrange] font-bold text-2xl">
                 500k+
               </span>
               <span>EXPERT MENTORS</span>
             </div>
-            <span className="w-px h-14 bg-[--colorOrange]"></span>
-            <div className="flex flex-col">
+            <span className="lg:w-px lg:h-14 h-px w-36 mt-4 mb-5 bg-[--colorOrange]"></span>
+            <div className="flex flex-col justify-center items-center">
               <span className="text-[--colorOrange] font-bold text-2xl">
                 300K+
               </span>
               <span>STUDENTS GLOBALLY</span>
             </div>
-            <span className="w-px h-14 bg-[--colorOrange]"></span>
-            <div className="flex flex-col">
+            <span className="lg:w-px lg:h-14 h-px w-36 mt-4 mb-5 bg-[--colorOrange]"></span>
+            <div className="flex flex-col justify-center items-center">
               <span className="text-[--colorOrange] font-bold text-2xl">
                 10 Min
               </span>
@@ -64,10 +63,10 @@ export default function Home() {
 
         {/* section courses details */}
         <section className="pt-10 pb-8 bg-[#FAFAFC]">
-          <div className="text-center m-auto px-[80px]">
+          <div className="text-center flex flex-col justify-center items-center m-auto px-[80px]">
             <p>Courses Details</p>
             <h3 className="text-3xl font-bold py-4">Explore Our Categories</h3>
-            <p className="w-1/2 m-auto pb-10">
+            <p className="lg:w-3/5 pb-10">
               It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout. The
               point of using Lorem is taht it has a more-or-less normal
@@ -75,50 +74,137 @@ export default function Home() {
               <q>Content here, content here</q>, making it look like readable
               English.
             </p>
-            <div className="grid grid-cols-3 gap-3 m-auto">
-              {items.map((_, index) => (
-                <div
-                  key={index}
-                  className="w-[90%] bg-white p-3 flex gap-3 items-center"
-                >
-                  <img
-                    className="w-14"
-                    src="../../../public/team-03.jpg"
-                    alt=""
-                  />
-                  <div className="w-2/3 text-start">
-                    <p className="font-bold">Design & Development</p>
-                    <span className="text-[#C0C0C0] text-[14px]">
-                      250+ course availble
-                    </span>
-                  </div>
+            <div className="grid lg:grid-cols-4 grid-cols-2 gap-3 m-auto">
+
+
+              <div
+                className="w-[90%] bg-white p-3 flex gap-3 items-center"
+              >
+
+                <img
+                  className="w-14"
+                  src="https://static.vecteezy.com/system/resources/previews/013/313/458/non_2x/html-icon-3d-rendering-illustration-vector.jpg"
+                  alt=""
+                />
+                <div className="w-2/3 text-start">
+                  <p className="font-bold">Web Development</p>
+                  <span className="text-[#C0C0C0] text-[14px]">
+                    250+ course availble
+                  </span>
                 </div>
-              ))}
+              </div>
+
+              <div
+                className="w-[90%] bg-white p-3 flex gap-3 items-center"
+              >
+
+                <img
+                  className="w-14"
+                  src="https://opensource.google/images/projects/os-projects-flutter_thumbnail.png"
+                  alt=""
+                />
+                <div className="w-2/3 text-start">
+                  <p className="font-bold">Mobile Development</p>
+                  <span className="text-[#C0C0C0] text-[14px]">
+                    250+ course availble
+                  </span>
+                </div>
+
+              </div> <div
+                className="w-[90%] bg-white p-3 flex gap-3 items-center"
+              >
+
+                <img
+                  className="w-14"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuo_NsNG-dZ7fA1qtHYzFEnxHbiVFH16VLkA&s"
+                  alt=""
+                />
+                <div className="w-2/3 text-start">
+                  <p className="font-bold">Database Creation</p>
+                  <span className="text-[#C0C0C0] text-[14px]">
+                    250+ course availble
+                  </span>
+                </div>
+
+              </div> <div
+                className="w-[90%] bg-white p-3 flex gap-3 items-center"
+              >
+
+                <img
+                  className="w-14"
+                  src="https://149848395.v2.pressablecdn.com/wp-content/uploads/2022/01/adobe-illustrator-versus-photoshop-differences.jpg"
+                  alt=""
+                />
+                <div className="w-2/3 text-start">
+                  <p className="font-bold">Graphic Design</p>
+                  <span className="text-[#C0C0C0] text-[14px]">
+                    250+ course availble
+                  </span>
+                </div>
+
+              </div> <div
+                className="w-[90%] bg-white p-3 flex gap-3 items-center"
+              >
+
+                <img
+                  className="w-14"
+                  src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=600/uploads/users/16/courses/578/preview_image/introduction-to-video-editing-in-adobe-premiere-pro-400x277.png"
+                  alt=""
+                />
+                <div className="w-2/3 text-start">
+                  <p className="font-bold">Video Editing</p>
+                  <span className="text-[#C0C0C0] text-[14px]">
+                    250+ course availble
+                  </span>
+                </div>
+              </div>
+
+              <div
+                className="w-[90%] bg-white p-3 flex gap-3 items-center"
+              >
+
+                <img
+                  className="w-14"
+                  src="https://spin.atomicobject.com/wp-content/uploads/Figma-Image.jpg"
+                  alt=""
+                />
+                <div className="w-2/3 text-start">
+                  <p className="font-bold">UI&UX Development</p>
+                  <span className="text-[#C0C0C0] text-[14px]">
+                    250+ course availble
+                  </span>
+                </div>
+              </div>
+
+
+
             </div>
           </div>
         </section>
 
         {/* section all categories */}
-        <section className="pt-10 pb-8 bg-[#FAFAFC]">
-          <div className="text-center m-auto px-[80px]">
+        <section className="pt-10 pb-8  bg-[#FAFAFC]">
+          <div className="text-center flex flex-col justify-center items-center m-auto px-[80px]">
             <ButtonComponent nameBtn="All categories"></ButtonComponent>
             <div className="text mt-16 mb-12">
               <p>Trusted by 56000+ Companies</p>
               <h3 className="text-3xl my-5 font-bold">Our Trusted Companies</h3>
             </div>
-            <div className="flex justify-between">
-              <img className="w-16" src="../../../public/team-03.jpg" alt="" />
-              <img className="w-16" src="../../../public/team-03.jpg" alt="" />
-              <img className="w-16" src="../../../public/team-03.jpg" alt="" />
-              <img className="w-16" src="../../../public/team-03.jpg" alt="" />
-              <img className="w-16" src="../../../public/team-03.jpg" alt="" />
+            <div className=" w-3/4  flex flex-col lg:flex-row justify-center items-center gap-8 lg:justify-between">
+
+              <img className="w-1/2 lg:w-1/6 " src="https://1000logos.net/wp-content/uploads/2017/06/Vodafone_Logo.png" alt="" />
+              <img className="w-1/2 lg:w-1/6 " src="https://images.crunchbase.com/image/upload/c_pad,f_auto,q_auto:eco,dpr_1/uabuaawthxuohcgzudmb" alt="" />
+              <img className="w-1/2 lg:w-1/6 " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx2GwSnpGTvFJQO41gc683FZyPgeNGCt2xdg&s" alt="" />
+              <img className="w-1/2 lg:w-1/6 " src="https://logos-world.net/wp-content/uploads/2021/11/Udemy-Logo.png" alt="" />
+              <img className="w-1/2 lg:w-1/6 " src="https://media.licdn.com/dms/image/v2/C560BAQGK3uuhQer46g/company-logo_200_200/company-logo_200_200/0/1631351788797?e=2147483647&v=beta&t=oGL-yHbzSy8MbCU-d4CfsELlfgQP3KX_fm5F6wcaGxA" alt="" />
+
             </div>
           </div>
         </section>
 
         {/* section special courses */}
         <section className="pt-10 pb-8 bg-[#FAFAFC]">
-          <div className="text-center m-auto px-[80px]">
+          <div className="text-center flex flex-col justify-center items-center m-auto px-[80px]">
             <div className="text">
               <h2 className="text-3xl mb-5 font-bold">
                 Special Course For You
@@ -132,7 +218,7 @@ export default function Home() {
                 hidden in the middle of text.
               </p>
             </div>
-            <div className="courses my-16 grid grid-cols-4 gap-6">
+            <div className="courses lg:w-5/6 my-16 grid lg:grid-cols-4 grid-cols-2 gap-3">
               {items.map((_, index) => (
                 <div
                   key={index}
@@ -144,12 +230,12 @@ export default function Home() {
                       src="../../../public/team-03.jpg"
                       alt=""
                     />
-                    <figcaption className="absolute bottom-[-14px] left-1/2 translate-x-[-50%] w-[fit-content] bg-white font-bold px-2 rounded border-2 border-[--colorOrange]">
+                    <figcaption className="absolute bottom-[-14px] left-1/2 lg:text-sm text-xs translate-x-[-50%] w-2/3 flex justify-center bg-white font-bold px-2 rounded border-2 border-[--colorOrange]">
                       Graphic Design
                     </figcaption>
                   </figure>
                   <div>
-                    <h4 className="font-bold text-2xl mt-4 mb-2">
+                    <h4 className="font-bold text-xl mt-4 mb-2">
                       Fundamentals of Graphic Design
                     </h4>
                     <p className="text-[#767676]">By Alex Justin Batler</p>
@@ -167,10 +253,6 @@ export default function Home() {
                         <span>4.8</span>
                       </div>
 
-                      <div className="flex gap-2">
-                        <span className="block w-[25px] h-[25px] bg-[#DFF2F0] rounded-full"></span>
-                        <span>$101.00</span>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -186,20 +268,20 @@ export default function Home() {
 
         {/* section about us */}
         <section className="pt-10 pb-8 bg-[#FAFAFC]">
-          <div className="px-[80px] flex justify-between items-center gap-16">
+          <div className="lg:px-[80px] w-full  flex flex-col lg:flex-row justify-between items-center lg:gap-16">
             <figure className="relative w-[50%] h-[100%]">
               <img
-                className="rounded w-[60%]"
-                src="../../../public/about.jpg"
+                className="rounded w-[90%] lg:w-[60%]"
+                src="https://media.gettyimages.com/id/1328492781/photo/communicating-on-the-video-call-from-home.jpg?s=612x612&w=gi&k=20&c=AFTXkR6EL2v9qAtPXVHzrUiUN8yJtVIW565LPIKMzcE="
                 alt=""
               />
               <img
-                className="absolute rounded w-[30%] top-1/2 translate-y-[-50%] right-[130px]"
-                src="../../../public/services.jpg"
+                className="absolute rounded lg:w-[30%] lg:top-1/2 lg:translate-y-[-50%] lg:right-[130px] w-[60%] top-[60%] translate-y-[-50%] right-[-120px]"
+                src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/e-learning-online-classes-online-distance-design-template-2075ab88e57431859fc3a3f130423696_screen.jpg?ts=1686041965"
                 alt=""
               />
             </figure>
-            <div className="w-1/2 py-10">
+            <div className="w-3/4 lg:w-1/2 py-10">
               <p>About us</p>
               <h3 className="text-3xl font-bold my-5">
                 We Are Maximize Your Learning Growth
@@ -210,21 +292,17 @@ export default function Home() {
                 dolores et quas molestias excepturi sint occaecati cupiditate
                 non provident.
               </p>
-              <div className="grid grid-cols-2">
+              <div className="grid gap-4 lg:grid-cols-2 grid-cols-1">
                 <div className="flex gap-4">
-                  <span></span>
                   <span>Training Services</span>
                 </div>
                 <div className="flex gap-4">
-                  <span></span>
                   <span>Big Experience</span>
                 </div>
                 <div className="flex gap-4">
-                  <span></span>
                   <span>Expert Trainer</span>
                 </div>
                 <div className="flex gap-4 mb-8">
-                  <span></span>
                   <span>Lifetime Access</span>
                 </div>
               </div>
@@ -244,7 +322,7 @@ export default function Home() {
               <p className="my-4">Feedback</p>
               <h3 className="text-3xl font-bold">Loved by Our Students</h3>
             </div>
-            <div className="grid grid-cols-2 gap-8 justify-center items-center">
+            <div className="lg:flex  justify-center items-center">
               <div>
                 <p className="text-2xl">Brooklyn Simmons</p>
                 <span className="text-[#C0C0C0]">Graphic Designer</span>
@@ -258,11 +336,10 @@ export default function Home() {
                 </p>
               </div>
               <div>
-                <video
-                  controls
-                  className=""
-                  src="../../../public/awesome-video.mp4"
-                ></video>
+
+
+                <iframe className="mt-5" width="560" height="315" src="https://www.youtube.com/embed/gHXSwOTuseA?si=QzeHE1sJiGyL37f0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
               </div>
             </div>
             <div className="grid grid-cols-3 gap-3 my-8">
@@ -280,7 +357,8 @@ export default function Home() {
               <div className="w-[90%] bg-white p-3 flex gap-3 items-center">
                 <img
                   className="w-14 rounded"
-                  src="../../../public/me.jpg"
+                  src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/451127075_3056737344466334_4670241179713803686_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=XErJz52g5VoQ7kNvgGAP_aA&_nc_ht=scontent-hbe1-1.xx&oh=00_AYCoJ7WNAjYgWBEgnNdZQOy-8VanM13KN0_tvkf-QQsu3Q&oe=66C4D5F8"
+
                   alt=""
                 />
                 <div className="w-2/3 text-start">
@@ -291,7 +369,8 @@ export default function Home() {
               <div className="w-[90%] bg-white p-3 flex gap-3 items-center">
                 <img
                   className="w-14 rounded"
-                  src="../../../public/me.jpg"
+                  src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/453011807_7875030812584727_2924410436610947275_n.jpg?stp=cp6_dst-jpg&_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=sWQeVJ2VejkQ7kNvgE4v1-g&_nc_ht=scontent-hbe1-1.xx&oh=00_AYA4cUlRFNagZCItkwhMjX49cVBgbcHLfXkmoZIZWMtrtg&oe=66C4E9B7"
+
                   alt=""
                 />
                 <div className="w-2/3 text-start">
@@ -316,10 +395,16 @@ export default function Home() {
               dolores et quas molestias excepturi sint occaecati cupiditate non
               provident.
             </p>
-            <div className="grid grid-cols-4 justify-items-center gap-7 my-12">
-              <img className="rounded-2xl" src="../../../public/me.jpg" alt="" />
-              <img className="rounded-2xl" src="../../../public/me.jpg" alt="" />
-              <img className="rounded-2xl" src="../../../public/me.jpg" alt="" />
+            <div className="flex justify-center gap-7 my-12">
+
+              <img className="w-1/4 rounded-2xl" src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/453011807_7875030812584727_2924410436610947275_n.jpg?stp=cp6_dst-jpg&_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=sWQeVJ2VejkQ7kNvgE4v1-g&_nc_ht=scontent-hbe1-1.xx&oh=00_AYA4cUlRFNagZCItkwhMjX49cVBgbcHLfXkmoZIZWMtrtg&oe=66C4E9B7"
+              />
+              <img className="w-1/4 rounded-2xl"
+                src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/451127075_3056737344466334_4670241179713803686_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=XErJz52g5VoQ7kNvgGAP_aA&_nc_ht=scontent-hbe1-1.xx&oh=00_AYCoJ7WNAjYgWBEgnNdZQOy-8VanM13KN0_tvkf-QQsu3Q&oe=66C4D5F8"
+
+              />
+              <img className="w-1/4 rounded-2xl" src="../../../public/me.jpg" alt="" />
+
             </div>
             <div className="my-8">
               <ButtonComponent
@@ -327,25 +412,6 @@ export default function Home() {
                 bg="--colorOrange"
                 colorText="--colorWhite"
               ></ButtonComponent>
-            </div>
-          </div>
-        </section>
-
-        {/* section subscribe */}
-        <section className="pt-10 pb-8 bg-[#FAFAFC]">
-          <div className="px-[80px] text-center">
-            <p>Subscribe for free</p>
-            <h2 className="text-3xl font-bold my-8">Subscribe Newsletter</h2>
-            <p className="my-10 w-1/2 m-auto">
-              It is a long established fact that a reader will be distracted
-              by the readable content of a page when looking at its layout.
-              The point of using Lorem Ipsum is that has a more-or-less normal
-              distribution of letters, as oppposed to using Content here, making
-              it look like readable English.
-            </p>
-            <div className="flex items-center justify-center my-14">
-              <input type="email" className="rounded p-2" placeholder="Enter email address" />
-              <ButtonComponent nameBtn="Subscribe" bg="--colorOrange"></ButtonComponent>
             </div>
           </div>
         </section>

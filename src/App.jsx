@@ -13,42 +13,82 @@ import "react-toastify/dist/ReactToastify.css";
 import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
 import { ToastContainer } from "react-toastify";
 import Profile from "./Components/Profile/Profile";
+import PrivateRoute from "./Components/PrivateRoute";
+import { CoursesProvider } from "./Context/CoursesProvider";
+import WishList from "./Components/WishList/WishList";
+import Admin from "./Admin/Components/AdminPage/Admin";
+import UpdateCourse from "./Admin/Components/UpdateCourse/UpdateCourse";
+import AddCourse from "./Admin/Components/AddCourse/AddCourse";
+import CourseDetails from "./Components/ProductDetails/CourseDetails";
+import { store } from "./Redux/store";
+import { Provider } from "react-redux";
+
+
 
 let routers = createBrowserRouter([
   {
     path: "",
     element: <Layout />,
     children: [
-      { path: "home", element: <Home /> },
+      { index: true, element: <Home /> },
       { path: "about", element: <AboutUs /> },
       { path: "courses", element: <Courses /> },
-      { path: "mycourses", element: <MyCourses /> },
+      {
+        path: "mycourses",
+        element: <PrivateRoute />,
+        children: [{ path: "", element: <MyCourses /> }],
+      },
+
+      { path: "/courses/:id", element: <CourseDetails /> },
+
+      {
+        path: "mywishlist",
+        element: <PrivateRoute />,
+        children: [{ path: "", element: <WishList /> }],
+      },
       { path: "contact", element: <ContactUs /> },
       { path: "login", element: <Login /> },
       { path: "/register", element: <Register /> },
       { path: "/forgotpassword", element: <ForgotPassword /> },
       { path: "profile", element: <Profile /> },
       { path: "*", element: <Notfound /> },
+      // { path: "create", element: <CreateCourse /> },
+
     ],
+
+  },
+  {
+    path: "admin", element: <Admin />,
+
+    children: [
+      { path: "updatecourse", element: <UpdateCourse /> },
+      { path: "addcourse", element: <AddCourse /> },
+
+
+    ]
   },
 ]);
 
 function App() {
   return (
     <>
-      <ToastContainer
-        position="bottom-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
-      <RouterProvider router={routers}></RouterProvider>
+      <Provider store={store}>
+        <CoursesProvider>
+          <ToastContainer
+            position="bottom-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
+          <RouterProvider router={routers}></RouterProvider>
+        </CoursesProvider>
+      </Provider>
     </>
   );
 }
