@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { db } from "../../firebase-config";
 import CourseItem from "./CourseItem";
 import Spinner from "../Spinner";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Courses() {
   const [courses, setCourses] = useState([]);
@@ -16,37 +17,37 @@ export default function Courses() {
   const [lastVisible, setLastVisible] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [searching, setSearching] = useState(false);
+
+  const fetchCourses = async () => {
+    const coursesCollection = collection(db, "courses");
+    const q = query(coursesCollection, limit(20));
+    const querySnapshot = await getDocs(q);
+    const coursesList = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    const filteredCourses = coursesList.filter((course) =>
+      course.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const lastVisibleDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+    setLastVisible(lastVisibleDoc);
+
+    return filteredCourses;
+  };
+
+  // Use the updated useQuery syntax for React Query v5
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["courses", searchTerm], // Include searchTerm in queryKey to trigger re-fetch on search
+    queryFn: fetchCourses,
+  });
+
   useEffect(() => {
-    fetchCourses();
-  }, []);
-
-  async function fetchCourses() {
-    setLoading(true);
-    try {
-      const coursesCollection = collection(db, "courses");
-      let q = query(coursesCollection, limit(20));
-      const querySnapshot = await getDocs(q);
-
-      const coursesList = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-
-      const filteredCourses = coursesList.filter((course) =>
-        course.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-
-      const lastVisibleDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
-      setLastVisible(lastVisibleDoc);
-
-      setCourses(filteredCourses);
-    } catch (error) {
-      console.error("Error fetching courses:", error);
-    } finally {
-      setLoading(false);
-      setSearching(false);
+    if (data) {
+      setCourses(data);
     }
-  }
+  }, [data]);
 
   const loadMoreCourses = async () => {
     if (!lastVisible) return;
@@ -112,9 +113,11 @@ export default function Courses() {
         id="Projects"
         className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-12 gap-x-9 mt-10 mb-5"
       >
-        {courses.map((course) => (
-          <CourseItem course={course} key={course.id} />
-        ))}
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          courses.map((course) => <CourseItem course={course} key={course.id} />)
+        )}
       </section>
       <div className="flex justify-center">
         <button

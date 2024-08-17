@@ -22,6 +22,7 @@ import AddCourse from "./Admin/Components/AddCourse/AddCourse";
 import CourseDetails from "./Components/ProductDetails/CourseDetails";
 import { store } from "./Redux/store";
 import { Provider } from "react-redux";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 
 let routers = createBrowserRouter([
@@ -66,27 +67,30 @@ let routers = createBrowserRouter([
     ]
   },
 ]);
-
+let query = new QueryClient
 function App() {
   return (
     <>
-      <Provider store={store}>
-        <CoursesProvider>
-          <ToastContainer
-            position="bottom-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="dark"
-          />
-          <RouterProvider router={routers}></RouterProvider>
-        </CoursesProvider>
-      </Provider>
+      <QueryClientProvider client={query}>
+        <Provider store={store}>
+          <CoursesProvider>
+            <ToastContainer
+              position="bottom-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+            />
+            <RouterProvider router={routers}></RouterProvider>
+          </CoursesProvider>
+        </Provider>
+      </QueryClientProvider>
+
     </>
   );
 }
