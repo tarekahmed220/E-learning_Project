@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
 import { useAuthStatus } from "../../hooks/useAuthStatus";
 import { toast } from "react-toastify";
@@ -16,7 +16,7 @@ export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const wishlistLength = useSelector((state) => state.wishlist.wishlist.length);
 
-  const userName = auth.currentUser.displayName.split(" ")[0];
+  // const userName = auth.currentUser.displayName.split(" ")[0];
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -73,7 +73,7 @@ export default function NavBar() {
               <>
                 <p className="text-amber-700 font-medium me-3">
 
-                  welcome: {userName}
+                  {/* welcome: {userName} */}
 
                 </p>
                 <div className="profile">
@@ -86,7 +86,7 @@ export default function NavBar() {
                       />
                     </button>
                     <div className="dropdown-content">
-                      <a href="#">Edit Profile</a>
+                      <Link to="/Profile">Edit Profile</Link>
                       <a className="cursor-pointer" onClick={onLogout}>
                         Logout
                       </a>

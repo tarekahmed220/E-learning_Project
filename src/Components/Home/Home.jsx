@@ -338,7 +338,7 @@ export default function Home() {
               <div>
 
 
-                <iframe className="mt-5" width="560" height="315" src="https://www.youtube.com/embed/gHXSwOTuseA?si=QzeHE1sJiGyL37f0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe className="mt-5" width="560" height="315" src="https://www.youtube.com/embed/gHXSwOTuseA?si=QzeHE1sJiGyL37f0" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
               </div>
             </div>
