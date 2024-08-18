@@ -20,6 +20,11 @@ export default function Admin() {
     const [searching, setSearching] = useState(false);
     const [isUpdateFormVisible, setIsUpdateFormVisible] = useState(false);
     const [selectedCourse, setSelectedCourse] = useState(null);
+    const [showForm, setShowForm] = useState(false);
+    const [NewCourseName, setNewCourseName] = useState("");
+    const [NewInstructorName, setNewInstructorName] = useState("");
+    const [NewCourseImg, setNewCourseImg] = useState(null);
+    const [NewInstructorImg, setNewInstructorImg] = useState(null);
 
     useEffect(() => {
         fetchCourses();
@@ -52,6 +57,7 @@ export default function Admin() {
             setSearching(false);
         }
     }
+
 
     const [courseName, setCourseName] = useState(selectedCourse?.title || '');
     const [instructorName, setInstructorName] = useState(selectedCourse?.visible_instructors[0]?.display_name || '');
@@ -102,6 +108,33 @@ export default function Admin() {
         setIsUpdateFormVisible(false);
         setSelectedCourse(null);
     };
+    const handleAddCancel = () => {
+        setShowForm(false); // Close the form when clicking AddCancel
+    };
+
+    const handleNewCourseImgChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setNewCourseImg(URL.createObjectURL(e.target.files[0]));
+        }
+    };
+
+    const handleNewInstructorImgChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setNewInstructorImg(URL.createObjectURL(e.target.files[0]));
+        }
+    };
+
+    const handleNewSubmit = () => {
+        // Create an object to hold all the data
+        const formData = {
+            NewCourseName,
+            NewInstructorName,
+            NewCourseImg,
+            NewInstructorImg,
+        };
+        console.log(formData); // Replace with any submission logic you want
+        setShowForm(false); // Close the form after NewSubmitting
+    };
 
 
     const handleImageUpload = (event, type) => {
@@ -137,26 +170,9 @@ export default function Admin() {
         console.log('Updated Course Image:', selectedCourse.image_480x270);
         console.log('Updated Instructor Image:', selectedCourse.visible_instructors[0].image_100x100);
 
-        // Optionally, update Firestore here
-        // ...
     };
 
 
-    <div className="instructor-name relative flex flex-col w-1/3">
-        <label className="font-medium" htmlFor="instructor-name">
-            Instructor Name Edit
-        </label>
-        <input
-            placeholder="Enter new name"
-            className="p-1 bg-amber-100 bg-opacity-5 mt-2 h-10 rounded-md border border-amber-600 outline-2 outline-fuchsia-700"
-            type="text"
-            id="instructor-name"
-            name="instructor-name"
-        />
-        <button className="w-44 rounded-md p-3 bg-[#d97706] hover:bg-[#d97706d7] text-white mt-28">
-            Save
-        </button>
-    </div>
     return (
         <>
             <div className="layout w-full pb-24">
@@ -184,6 +200,97 @@ export default function Admin() {
                         </button>
                     </div>
                 </div>
+                <div className="w-4/5 mx-auto dd-product">
+                    <button
+                        className="p-3 ms-32 bg-green-300 rounded-md w-48 border-2 border-green-500 bg-opacity-30 border-solid"
+                        onClick={() => setShowForm(true)} // Show the form when clicked
+                    >
+                        Add Product
+                    </button>              </div>
+
+                {showForm && (
+                    <div className="add w-screen z-10 mx-auto bg-gray-500 bg-opacity-45 flex justify-center items-center shadow-md fixed bottom-0 top-0 right-0 left-0">
+                        <div className="add-form w-3/5 mx-auto h-4/5 bg-amber-50 rounded-xl shadow-sm">
+                            <div className="imgs-add flex justify-evenly p-5 h-1/2 ">
+                                <div className="course-add-img relative flex flex-col justify-center items-center w-1/3 h-full">
+                                    <img
+                                        src={NewCourseImg || "https://img.myloview.com.br/adesivos/online-course-icon-vector-teacher-symbol-with-computer-monitor-and-whiteboard-for-online-education-class-in-a-glyph-pictogram-illustration-700-264104717.jpg"}
+                                        className="h-36 w-36 border bottom-4 border-amber-500 shadow-md rounded-full"
+                                        alt="Course"
+                                    />
+                                    <div className="add-icon absolute top-32 border-2 border-amber-700 right-1/3 rounded-full flex justify-center items-center w-9 h-9 bg-slate-200 cursor-pointer shadow-sm">
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            className="absolute w-full h-full opacity-0 cursor-pointer"
+                                            onChange={handleNewCourseImgChange}
+                                        />
+                                        <i className="fa-solid fa-circle-plus"></i>
+                                    </div>
+                                </div>
+                                <div className="instructor-add-img relative flex flex-col justify-center items-center w-1/3 h-full">
+                                    <img
+                                        className="h-36 w-36 bottom-4 border border-amber-500 shadow-md rounded-full"
+                                        src={NewInstructorImg || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_eN9ltaN4YL-7g4jrTdTXHsBUf_bWxQ_cSg&s"}
+                                        alt="Instructor"
+                                    />
+                                    <div className="add-icon absolute top-32 border-2 border-amber-700 right-1/3 rounded-full flex justify-center items-center w-9 h-9 bg-slate-200 cursor-pointer shadow-sm">
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            className="absolute w-full h-full opacity-0 cursor-pointer"
+                                            onChange={handleNewInstructorImgChange}
+                                        />
+                                        <i className="fa-solid fa-circle-plus"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="p-8 flex justify-evenly items-center">
+                                <div className="course-add-name relative flex flex-col w-1/3">
+                                    <label className="font-medium" htmlFor="course-name">
+                                        Course Name*
+                                    </label>
+                                    <input
+                                        placeholder="Enter new name"
+                                        className="p-1 bg-amber-100 bg-opacity-5 mt-2 h-10 rounded-md border border-amber-600 outline-2 outline-fuchsia-700"
+                                        type="text"
+                                        id="course-name"
+                                        value={NewCourseName}
+                                        onChange={(e) => setNewCourseName(e.target.value)}
+                                    />
+                                    <button
+                                        className="w-44 rounded-md p-3 bg-black hover:bg-slate-700 text-white mt-14"
+                                        onClick={handleAddCancel}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                                <div className="instructor-add-name relative flex flex-col w-1/3">
+                                    <label className="font-medium" htmlFor="instructor-name">
+                                        Instructor Name*
+                                    </label>
+                                    <input
+                                        placeholder="Enter new name"
+                                        className="p-1 bg-amber-100 bg-opacity-5 mt-2 h-10 rounded-md border border-amber-600 outline-2 outline-fuchsia-700"
+                                        type="text"
+                                        id="instructor-name"
+                                        value={NewInstructorName}
+                                        onChange={(e) => setNewInstructorName(e.target.value)}
+                                    />
+                                    <button
+                                        className="w-44 rounded-md p-3 ms-auto bg-[#d97706] hover:bg-[#d97706d7] text-white mt-14"
+                                        onClick={handleNewSubmit}
+                                    >
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                )}
+
 
                 <section
                     id="Projects"
