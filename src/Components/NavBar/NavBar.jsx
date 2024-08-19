@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
 import { useAuthStatus } from "../../hooks/useAuthStatus";
 import { toast } from "react-toastify";
@@ -12,7 +12,10 @@ export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const wishlistLength = useSelector((state) => state.wishlist.wishlist.length);
 
-  const userName = auth.currentUser.displayName.split(" ")[0];
+  let userName = "";
+  if (auth.currentUser) {
+    userName = auth.currentUser.displayName.split(" ")[0];
+  }
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -59,9 +62,11 @@ export default function NavBar() {
     <>
       <nav className="bg-[#FFF8D9] border-gray-200 py-2.5">
         <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
-          <span className="self-center text-amber-700 text-xl font-semibold whitespace-nowrap font-mono">
-            LEARN YOU
-          </span>
+          <Link to="home">
+            <span className="self-center text-amber-700 text-xl font-semibold whitespace-nowrap font-mono">
+              Learnree - Learn Free
+            </span>
+          </Link>
 
           <div className="flex items-center lg:order-2">
             <div className="hidden mt-2 mr-4 sm:inline-block">

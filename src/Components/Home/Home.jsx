@@ -1,9 +1,10 @@
+import { auth } from "../../firebase-config";
 import ButtonComponent from "./Components/buttonComponent";
 import "./home.css";
 
 export default function Home() {
   const items = Array.from({ length: 6 });
-
+  console.log(auth);
   return (
     <div className="">
       <div className="">

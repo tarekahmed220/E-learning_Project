@@ -113,7 +113,7 @@ export default function Register() {
         password
       );
       const user = userCredentials.user;
-      console.log(user);
+
       await updateProfile(auth.currentUser, {
         displayName: fullName,
       });
@@ -122,7 +122,7 @@ export default function Register() {
       delete formDataCopy.repassword;
       formDataCopy.timestamp = serverTimestamp();
       await setDoc(doc(db, "users", user.uid), formDataCopy);
-      navigate("/login");
+      navigate("/home");
     } catch (error) {
       console.log(error.code);
       if (error.code === "auth/user-not-found") {

@@ -11,8 +11,8 @@ function WishList() {
   };
 
   return (
-    <div className="my-wishlist max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h1 className="text-3xl font-bold mb-6">My Wishlist</h1>
+    <div className="my-wishlist max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg min-h-[68vh]">
+      <h1 className="text-3xl font-bold mb-6 text-center">My Wishlist</h1>
       {wishlist.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {wishlist.map((course) => (
@@ -46,7 +46,9 @@ function WishList() {
           ))}
         </div>
       ) : (
-        <p className="text-xl text-gray-600">Your wishlist is empty.</p>
+        <p className="text-xl text-gray-600 text-center">
+          Your wishlist is empty.
+        </p>
       )}
     </div>
   );
