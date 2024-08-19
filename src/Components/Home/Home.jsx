@@ -1,8 +1,11 @@
+import { useSelector } from "react-redux";
 import ButtonComponent from "./Components/buttonComponent";
 import "./home.css";
 
 export default function Home() {
   const items = Array.from({ length: 6 });
+
+  const translate = useSelector((state) => state.language.translation);
 
   return (
     <div className="">
@@ -11,19 +14,16 @@ export default function Home() {
         <header className="layout py-16">
           <div className="lg:w-1/3 w-3/4  text-center m-auto">
             <h2 className="text-4xl font-bold text-[--colorOrange]">
-              Find Your Perfect Learn Platform
+              {translate.textH2Header}
             </h2>
-            <p className="my-7">
-              Our mission is to help people to find the best course online and
-              learn with export anytime, anywhere.
-            </p>
+            <p className="my-7">{translate.pHeader}</p>
             <div className="flex justify-center gap-5">
               <ButtonComponent
-                nameBtn="Join for free"
+                nameBtn={translate.JoinForFree}
                 bg="--colorOrange"
                 colorText="#ffffff"
               ></ButtonComponent>
-              <ButtonComponent nameBtn="Learn more"></ButtonComponent>
+              <ButtonComponent nameBtn={translate.LearnMore}></ButtonComponent>
             </div>
           </div>
         </header>
@@ -35,28 +35,28 @@ export default function Home() {
               <span className="text-[--colorOrange] font-bold text-2xl">
                 10K+
               </span>
-              <span>TOTAL COURSES</span>
+              <span>{translate.TOTALCOURSES}</span>
             </div>
             <span className="lg:w-px lg:h-14 h-px w-36 mt-4 mb-5 bg-[--colorOrange]"></span>
             <div className="flex flex-col justify-center items-center ">
               <span className="text-[--colorOrange] font-bold text-2xl">
                 500k+
               </span>
-              <span>EXPERT MENTORS</span>
+              <span>{translate.EXPERTMENTORS}</span>
             </div>
             <span className="lg:w-px lg:h-14 h-px w-36 mt-4 mb-5 bg-[--colorOrange]"></span>
             <div className="flex flex-col justify-center items-center">
               <span className="text-[--colorOrange] font-bold text-2xl">
                 300K+
               </span>
-              <span>STUDENTS GLOBALLY</span>
+              <span>{translate.STUDENTSGLOBALLY}</span>
             </div>
             <span className="lg:w-px lg:h-14 h-px w-36 mt-4 mb-5 bg-[--colorOrange]"></span>
             <div className="flex flex-col justify-center items-center">
               <span className="text-[--colorOrange] font-bold text-2xl">
                 10 Min
               </span>
-              <span>AVEREGE PER CLASS</span>
+              <span>{translate.AVEREGEPERCLASS}</span>
             </div>
           </div>
         </section>
@@ -64,120 +64,93 @@ export default function Home() {
         {/* section courses details */}
         <section className="pt-10 pb-8 bg-[#FAFAFC]">
           <div className="text-center flex flex-col justify-center items-center m-auto px-[80px]">
-            <p>Courses Details</p>
-            <h3 className="text-3xl font-bold py-4">Explore Our Categories</h3>
+            <p>{translate.CoursesDetails}</p>
+            <h3 className="text-3xl font-bold py-4">
+              {translate.ExploreOurCategories}
+            </h3>
             <p className="lg:w-3/5 pb-10">
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout. The
-              point of using Lorem is taht it has a more-or-less normal
-              distribution of letters, as opposed to using{" "}
-              <q>Content here, content here</q>, making it look like readable
-              English.
+              {translate.p1SectionDetails} <q>{translate.ContectHere}</q>
+              {translate.p2SectionDetails}{" "}
             </p>
             <div className="grid lg:grid-cols-4 grid-cols-2 gap-3 m-auto">
-
-
-              <div
-                className="w-[90%] bg-white p-3 flex gap-3 items-center"
-              >
-
+              <div className="w-[90%] bg-white p-3 flex gap-3 items-center">
                 <img
                   className="w-14"
                   src="https://static.vecteezy.com/system/resources/previews/013/313/458/non_2x/html-icon-3d-rendering-illustration-vector.jpg"
                   alt=""
                 />
                 <div className="w-2/3 text-start">
-                  <p className="font-bold">Web Development</p>
+                  <p className="font-bold">{translate.WebDevelopment}</p>
                   <span className="text-[#C0C0C0] text-[14px]">
-                    250+ course availble
+                    250+ {translate.courseAvailble}
                   </span>
                 </div>
               </div>
-
-              <div
-                className="w-[90%] bg-white p-3 flex gap-3 items-center"
-              >
-
+              <div className="w-[90%] bg-white p-3 flex gap-3 items-center">
                 <img
                   className="w-14"
                   src="https://opensource.google/images/projects/os-projects-flutter_thumbnail.png"
                   alt=""
                 />
                 <div className="w-2/3 text-start">
-                  <p className="font-bold">Mobile Development</p>
+                  <p className="font-bold">{translate.MobileDevelopment}</p>
                   <span className="text-[#C0C0C0] text-[14px]">
-                    250+ course availble
+                    250+ {translate.courseAvailble}
                   </span>
                 </div>
-
-              </div> <div
-                className="w-[90%] bg-white p-3 flex gap-3 items-center"
-              >
-
+              </div>{" "}
+              <div className="w-[90%] bg-white p-3 flex gap-3 items-center">
                 <img
                   className="w-14"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuo_NsNG-dZ7fA1qtHYzFEnxHbiVFH16VLkA&s"
                   alt=""
                 />
                 <div className="w-2/3 text-start">
-                  <p className="font-bold">Database Creation</p>
+                  <p className="font-bold">{translate.DatabaseCreation}</p>
                   <span className="text-[#C0C0C0] text-[14px]">
-                    250+ course availble
+                    250+ {translate.courseAvailble}
                   </span>
                 </div>
-
-              </div> <div
-                className="w-[90%] bg-white p-3 flex gap-3 items-center"
-              >
-
+              </div>{" "}
+              <div className="w-[90%] bg-white p-3 flex gap-3 items-center">
                 <img
                   className="w-14"
                   src="https://149848395.v2.pressablecdn.com/wp-content/uploads/2022/01/adobe-illustrator-versus-photoshop-differences.jpg"
                   alt=""
                 />
                 <div className="w-2/3 text-start">
-                  <p className="font-bold">Graphic Design</p>
+                  <p className="font-bold">{translate.GraphicDesign}</p>
                   <span className="text-[#C0C0C0] text-[14px]">
-                    250+ course availble
+                    250+ {translate.courseAvailble}
                   </span>
                 </div>
-
-              </div> <div
-                className="w-[90%] bg-white p-3 flex gap-3 items-center"
-              >
-
+              </div>{" "}
+              <div className="w-[90%] bg-white p-3 flex gap-3 items-center">
                 <img
                   className="w-14"
                   src="https://cms-assets.tutsplus.com/cdn-cgi/image/width=600/uploads/users/16/courses/578/preview_image/introduction-to-video-editing-in-adobe-premiere-pro-400x277.png"
                   alt=""
                 />
                 <div className="w-2/3 text-start">
-                  <p className="font-bold">Video Editing</p>
+                  <p className="font-bold">{translate.VideoEditing}</p>
                   <span className="text-[#C0C0C0] text-[14px]">
-                    250+ course availble
+                    250+ {translate.courseAvailble}
                   </span>
                 </div>
               </div>
-
-              <div
-                className="w-[90%] bg-white p-3 flex gap-3 items-center"
-              >
-
+              <div className="w-[90%] bg-white p-3 flex gap-3 items-center">
                 <img
                   className="w-14"
                   src="https://spin.atomicobject.com/wp-content/uploads/Figma-Image.jpg"
                   alt=""
                 />
                 <div className="w-2/3 text-start">
-                  <p className="font-bold">UI&UX Development</p>
+                  <p className="font-bold">{translate.UIUXDevelopment}</p>
                   <span className="text-[#C0C0C0] text-[14px]">
-                    250+ course availble
+                    250+ {translate.courseAvailble}
                   </span>
                 </div>
               </div>
-
-
-
             </div>
           </div>
         </section>
@@ -185,19 +158,39 @@ export default function Home() {
         {/* section all categories */}
         <section className="pt-10 pb-8  bg-[#FAFAFC]">
           <div className="text-center flex flex-col justify-center items-center m-auto px-[80px]">
-            <ButtonComponent nameBtn="All categories"></ButtonComponent>
+            <ButtonComponent nameBtn={translate.AllCategories}></ButtonComponent>
             <div className="text mt-16 mb-12">
-              <p>Trusted by 56000+ Companies</p>
-              <h3 className="text-3xl my-5 font-bold">Our Trusted Companies</h3>
+              <p>{translate.TrustedBy56000Companies}</p>
+              <h3 className="text-3xl my-5 font-bold">
+                {translate.OurTrustedCompanies}
+              </h3>
             </div>
             <div className=" w-3/4  flex flex-col lg:flex-row justify-center items-center gap-8 lg:justify-between">
-
-              <img className="w-1/2 lg:w-1/6 " src="https://1000logos.net/wp-content/uploads/2017/06/Vodafone_Logo.png" alt="" />
-              <img className="w-1/2 lg:w-1/6 " src="https://images.crunchbase.com/image/upload/c_pad,f_auto,q_auto:eco,dpr_1/uabuaawthxuohcgzudmb" alt="" />
-              <img className="w-1/2 lg:w-1/6 " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx2GwSnpGTvFJQO41gc683FZyPgeNGCt2xdg&s" alt="" />
-              <img className="w-1/2 lg:w-1/6 " src="https://logos-world.net/wp-content/uploads/2021/11/Udemy-Logo.png" alt="" />
-              <img className="w-1/2 lg:w-1/6 " src="https://media.licdn.com/dms/image/v2/C560BAQGK3uuhQer46g/company-logo_200_200/company-logo_200_200/0/1631351788797?e=2147483647&v=beta&t=oGL-yHbzSy8MbCU-d4CfsELlfgQP3KX_fm5F6wcaGxA" alt="" />
-
+              <img
+                className="w-1/2 lg:w-1/6 "
+                src="https://1000logos.net/wp-content/uploads/2017/06/Vodafone_Logo.png"
+                alt=""
+              />
+              <img
+                className="w-1/2 lg:w-1/6 "
+                src="https://images.crunchbase.com/image/upload/c_pad,f_auto,q_auto:eco,dpr_1/uabuaawthxuohcgzudmb"
+                alt=""
+              />
+              <img
+                className="w-1/2 lg:w-1/6 "
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx2GwSnpGTvFJQO41gc683FZyPgeNGCt2xdg&s"
+                alt=""
+              />
+              <img
+                className="w-1/2 lg:w-1/6 "
+                src="https://logos-world.net/wp-content/uploads/2021/11/Udemy-Logo.png"
+                alt=""
+              />
+              <img
+                className="w-1/2 lg:w-1/6 "
+                src="https://media.licdn.com/dms/image/v2/C560BAQGK3uuhQer46g/company-logo_200_200/company-logo_200_200/0/1631351788797?e=2147483647&v=beta&t=oGL-yHbzSy8MbCU-d4CfsELlfgQP3KX_fm5F6wcaGxA"
+                alt=""
+              />
             </div>
           </div>
         </section>
@@ -207,16 +200,9 @@ export default function Home() {
           <div className="text-center flex flex-col justify-center items-center m-auto px-[80px]">
             <div className="text">
               <h2 className="text-3xl mb-5 font-bold">
-                Special Course For You
+                {translate.SpecialCourseForYou}
               </h2>
-              <p>
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered aiteration in some form, by
-                injected humor, or randomized words which dont look even
-                slightly believable. if you are going to use a pasage of Lorem
-                Ipsum, you nneed to be sure there isnt anything embarrassing
-                hidden in the middle of text.
-              </p>
+              <p>{translate.pSectionSpecial}</p>
             </div>
             <div className="courses lg:w-5/6 my-16 grid lg:grid-cols-4 grid-cols-2 gap-3">
               {items.map((_, index) => (
@@ -252,7 +238,6 @@ export default function Home() {
                         <span className="block w-[25px] h-[25px] bg-[#FDF2D6] rounded-full"></span>
                         <span>4.8</span>
                       </div>
-
                     </div>
                   </div>
                 </div>
@@ -261,7 +246,7 @@ export default function Home() {
             <ButtonComponent
               fontText="bold"
               colorText="--colorOrange"
-              nameBtn="All Courses"
+              nameBtn={translate.AllCourses}
             ></ButtonComponent>
           </div>
         </section>
@@ -282,34 +267,29 @@ export default function Home() {
               />
             </figure>
             <div className="w-3/4 lg:w-1/2 py-10">
-              <p>About us</p>
+              <p>{translate.AboutUs}</p>
               <h3 className="text-3xl font-bold my-5">
-                We Are Maximize Your Learning Growth
+                {translate.WeAreMaximizeYourLearningGrowth}
               </h3>
-              <p className="text-[#7B7A7F] my-5">
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                blanditiis praesentium voluptatum deleniti atuqe corrupti quos
-                dolores et quas molestias excepturi sint occaecati cupiditate
-                non provident.
-              </p>
+              <p className="text-[#7B7A7F] my-5">{translate.pSectionAboutUs}</p>
               <div className="grid gap-4 lg:grid-cols-2 grid-cols-1">
                 <div className="flex gap-4">
-                  <span>Training Services</span>
+                  <span>{translate.TrainingServices}</span>
                 </div>
                 <div className="flex gap-4">
-                  <span>Big Experience</span>
+                  <span>{translate.BigExperience}</span>
                 </div>
                 <div className="flex gap-4">
-                  <span>Expert Trainer</span>
+                  <span>{translate.ExpertTrainer}</span>
                 </div>
                 <div className="flex gap-4 mb-8">
-                  <span>Lifetime Access</span>
+                  <span>{translate.LifetimeAccess}</span>
                 </div>
               </div>
               <ButtonComponent
                 bg="--colorOrange"
                 colorText="--colorWhite"
-                nameBtn="Explore More"
+                nameBtn={translate.ExploreMore}
               ></ButtonComponent>
             </div>
           </div>
@@ -319,27 +299,31 @@ export default function Home() {
         <section className="pt-10 pb-10 bg-[#FAF7F2]">
           <div className="px-[80px]">
             <div className="text-center my-10">
-              <p className="my-4">Feedback</p>
-              <h3 className="text-3xl font-bold">Loved by Our Students</h3>
+              <p className="my-4">{translate.Feedback}</p>
+              <h3 className="text-3xl font-bold">
+                {translate.LovedbyOurStudents}
+              </h3>
             </div>
             <div className="lg:flex  justify-center items-center">
               <div>
-                <p className="text-2xl">Brooklyn Simmons</p>
-                <span className="text-[#C0C0C0]">Graphic Designer</span>
+                <p className="text-2xl">{translate.BrooklynSimmons}</p>
+                <span className="text-[#C0C0C0]">
+                  {translate.GraphicDesigner}
+                </span>
                 <ul></ul>
-                <p>
-                  On the other hand, we denounce with righteous and dislike men
-                  who are so beguild and demoralized by the charms of pleasure
-                  of the moment, so blinded by desire, that they cannot foresee
-                  the pain and trouble that are bound to ensue; and equal blame
-                  belongs to those who
-                </p>
+                <p>{translate.pSectionFeedback}</p>
               </div>
               <div>
-
-
-                <iframe className="mt-5" width="560" height="315" src="https://www.youtube.com/embed/gHXSwOTuseA?si=QzeHE1sJiGyL37f0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+                <iframe
+                  className="mt-5"
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/gHXSwOTuseA?si=QzeHE1sJiGyL37f0"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                ></iframe>
               </div>
             </div>
             <div className="grid grid-cols-3 gap-3 my-8">
@@ -350,32 +334,36 @@ export default function Home() {
                   alt=""
                 />
                 <div className="w-2/3 text-start">
-                  <p className="font-bold">Ahmed Tarek</p>
-                  <span className="text-[#C0C0C0] text-[14px]">Full Stack</span>
+                  <p className="font-bold">{translate.AhmedTarek}</p>
+                  <span className="text-[#C0C0C0] text-[14px]">
+                    {translate.FullStack}
+                  </span>
                 </div>
               </div>
               <div className="w-[90%] bg-white p-3 flex gap-3 items-center">
                 <img
                   className="w-14 rounded"
                   src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/451127075_3056737344466334_4670241179713803686_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=XErJz52g5VoQ7kNvgGAP_aA&_nc_ht=scontent-hbe1-1.xx&oh=00_AYCoJ7WNAjYgWBEgnNdZQOy-8VanM13KN0_tvkf-QQsu3Q&oe=66C4D5F8"
-
                   alt=""
                 />
                 <div className="w-2/3 text-start">
-                  <p className="font-bold">Tarek Ahmed</p>
-                  <span className="text-[#C0C0C0] text-[14px]">Full Stack</span>
+                  <p className="font-bold">{translate.TarekAhmed}</p>
+                  <span className="text-[#C0C0C0] text-[14px]">
+                    {translate.FullStack}
+                  </span>
                 </div>
               </div>
               <div className="w-[90%] bg-white p-3 flex gap-3 items-center">
                 <img
                   className="w-14 rounded"
                   src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/453011807_7875030812584727_2924410436610947275_n.jpg?stp=cp6_dst-jpg&_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=sWQeVJ2VejkQ7kNvgE4v1-g&_nc_ht=scontent-hbe1-1.xx&oh=00_AYA4cUlRFNagZCItkwhMjX49cVBgbcHLfXkmoZIZWMtrtg&oe=66C4E9B7"
-
                   alt=""
                 />
                 <div className="w-2/3 text-start">
-                  <p className="font-bold">Mohamed Tarek</p>
-                  <span className="text-[#C0C0C0] text-[14px]">Full Stack</span>
+                  <p className="font-bold">{translate.MohamedTarek}</p>
+                  <span className="text-[#C0C0C0] text-[14px]">
+                    {translate.FullStack}
+                  </span>
                 </div>
               </div>
             </div>
@@ -385,30 +373,31 @@ export default function Home() {
         {/* section Trainers */}
         <section className="pt-10 pb-8 bg-[#FAFAFC]">
           <div className="px-[80px] text-center">
-            <p>Trainers</p>
+            <p>{translate.Trainers}</p>
             <h2 className="text-3xl font-bold">
-              Our Professional Export Mentor
+              {translate.OurProfessionalExportMentor}
             </h2>
             <p className="text-[#7B7A7F] my-5 m-auto w-1/2">
-              At vero eos et accusamus et iusto odio dignissimos ducimus qui
-              blanditiis praesentium voluptatum deleniti atuqe corrupti quos
-              dolores et quas molestias excepturi sint occaecati cupiditate non
-              provident.
+              {translate.pSectionTrainer}
             </p>
             <div className="flex justify-center gap-7 my-12">
-
-              <img className="w-1/4 rounded-2xl" src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/453011807_7875030812584727_2924410436610947275_n.jpg?stp=cp6_dst-jpg&_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=sWQeVJ2VejkQ7kNvgE4v1-g&_nc_ht=scontent-hbe1-1.xx&oh=00_AYA4cUlRFNagZCItkwhMjX49cVBgbcHLfXkmoZIZWMtrtg&oe=66C4E9B7"
+              <img
+                className="w-1/4 rounded-2xl"
+                src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/453011807_7875030812584727_2924410436610947275_n.jpg?stp=cp6_dst-jpg&_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=sWQeVJ2VejkQ7kNvgE4v1-g&_nc_ht=scontent-hbe1-1.xx&oh=00_AYA4cUlRFNagZCItkwhMjX49cVBgbcHLfXkmoZIZWMtrtg&oe=66C4E9B7"
               />
-              <img className="w-1/4 rounded-2xl"
+              <img
+                className="w-1/4 rounded-2xl"
                 src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/451127075_3056737344466334_4670241179713803686_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=XErJz52g5VoQ7kNvgGAP_aA&_nc_ht=scontent-hbe1-1.xx&oh=00_AYCoJ7WNAjYgWBEgnNdZQOy-8VanM13KN0_tvkf-QQsu3Q&oe=66C4D5F8"
-
               />
-              <img className="w-1/4 rounded-2xl" src="../../../public/me.jpg" alt="" />
-
+              <img
+                className="w-1/4 rounded-2xl"
+                src="../../../public/me.jpg"
+                alt=""
+              />
             </div>
             <div className="my-8">
               <ButtonComponent
-                nameBtn="All Expert Mentor"
+                nameBtn={translate.AllExportMentor}
                 bg="--colorOrange"
                 colorText="--colorWhite"
               ></ButtonComponent>

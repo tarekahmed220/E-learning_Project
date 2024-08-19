@@ -1,9 +1,10 @@
-
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromWishlist } from "../../Redux/wishlistSlice";
 import { Link } from "react-router-dom";
 
 function WishList() {
+  const translate = useSelector((state) => state.language.translation);
+
   const wishlist = useSelector((state) => state.wishlist.wishlist);
   const dispatch = useDispatch();
 
@@ -13,7 +14,7 @@ function WishList() {
 
   return (
     <div className="my-wishlist max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h1 className="text-3xl font-bold mb-6">My Wishlist</h1>
+      <h1 className="text-3xl font-bold mb-6">{translate.MyWishlist}</h1>
       {wishlist.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {wishlist.map((course) => (
@@ -41,17 +42,16 @@ function WishList() {
                 onClick={() => handleRemoveFromWishlist(course.id)}
                 className="py-2 px-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-md transition"
               >
-                Remove from Wishlist
+                {translate.RemoveFromWishlist}
               </button>
             </div>
           ))}
         </div>
       ) : (
-        <p className="text-xl text-gray-600">Your wishlist is empty.</p>
+        <p className="text-xl text-gray-600">{translate.YourWishlistIsEmpty}</p>
       )}
     </div>
   );
-
 }
 
 export default WishList;
