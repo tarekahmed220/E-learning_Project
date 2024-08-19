@@ -121,6 +121,7 @@ export default function Register() {
       delete formDataCopy.password;
       delete formDataCopy.repassword;
       formDataCopy.timestamp = serverTimestamp();
+      formDataCopy.role = "user";
       await setDoc(doc(db, "users", user.uid), formDataCopy);
       navigate("/login");
     } catch (error) {
