@@ -1,6 +1,6 @@
 import { auth } from "../../firebase-config";
 import { useSelector } from "react-redux";
-import ButtonComponent from "./Components/buttonComponent";
+import ButtonComponent from "./Components/ButtonComponent";
 import "./home.css";
 
 export default function Home() {
@@ -157,7 +157,9 @@ export default function Home() {
         {/* section all categories */}
         <section className="pt-10 pb-8  bg-[#FAFAFC]">
           <div className="text-center flex flex-col justify-center items-center m-auto px-[80px]">
-            <ButtonComponent nameBtn={translate.AllCategories}></ButtonComponent>
+            <ButtonComponent
+              nameBtn={translate.AllCategories}
+            ></ButtonComponent>
             <div className="text mt-16 mb-12">
               <p>{translate.TrustedBy56000Companies}</p>
               <h3 className="text-3xl my-5 font-bold">
@@ -323,7 +325,6 @@ export default function Home() {
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
-
                 ></iframe>
               </div>
             </div>
