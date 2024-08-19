@@ -13,11 +13,10 @@ function WishList() {
   };
 
   return (
-
-    <div className="my-wishlist max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="my-wishlist max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg min-h-[67vh]">
       <h1 className="text-3xl font-bold mb-6">{translate.MyWishlist}</h1>
       {wishlist.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
           {wishlist.map((course) => (
             <div key={course.id} className="bg-white shadow-md rounded-xl p-4">
               <Link to={`/courses/${course.id}`}>
