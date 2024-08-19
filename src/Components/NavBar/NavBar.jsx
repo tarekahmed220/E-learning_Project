@@ -17,9 +17,9 @@ export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const wishlistLength = useSelector((state) => state.wishlist.wishlist.length);
 
-  const userName = auth.currentUser.displayName.split(" ")[0];
-  const translate = useSelector(state => state.language.translation);
 
+ const userName = auth.currentUser ? auth.currentUser.displayName.split(" ")[0] : "";
+  const translate = useSelector(state => state.language.translation);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
