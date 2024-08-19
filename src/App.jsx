@@ -21,9 +21,8 @@ import UpdateCourse from "./Admin/Components/UpdateCourse/UpdateCourse";
 import AddCourse from "./Admin/Components/AddCourse/AddCourse";
 import CourseDetails from "./Components/ProductDetails/CourseDetails";
 import { store } from "./Redux/store";
-import { Provider } from "react-redux";
-
-
+import { Provider, useSelector } from "react-redux";
+import { IntlProvider } from "react-intl";
 
 let routers = createBrowserRouter([
   {
@@ -53,19 +52,16 @@ let routers = createBrowserRouter([
       { path: "profile", element: <Profile /> },
       { path: "*", element: <Notfound /> },
       // { path: "create", element: <CreateCourse /> },
-
     ],
-
   },
   {
-    path: "admin", element: <Admin />,
+    path: "admin",
+    element: <Admin />,
 
     children: [
       { path: "updatecourse", element: <UpdateCourse /> },
       { path: "addcourse", element: <AddCourse /> },
-
-
-    ]
+    ],
   },
 ]);
 
@@ -73,6 +69,37 @@ function App() {
   return (
     <>
       <Provider store={store}>
+        {/* <div dir={lang === "en" ? "rtl" : "ltr"}>
+          <IntlProvider locale="en">
+            <CoursesProvider>
+              <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+              />
+              <RouterProvider router={routers}></RouterProvider>
+            </CoursesProvider>
+          </IntlProvider>
+        </div> */}
+        <AppContent></AppContent>
+      </Provider>
+    </>
+  );
+}
+
+function AppContent() {
+  const lang = useSelector((state) => state.language.myLang);
+  
+  return (
+    <div dir={lang === "en" ? "ltr" : "rtl"}>
+      <IntlProvider locale={lang}>
         <CoursesProvider>
           <ToastContainer
             position="bottom-center"
@@ -80,16 +107,16 @@ function App() {
             hideProgressBar={false}
             newestOnTop={false}
             closeOnClick
-            rtl={false}
+            rtl={lang === "ar"}
             pauseOnFocusLoss
             draggable
             pauseOnHover
             theme="dark"
           />
-          <RouterProvider router={routers}></RouterProvider>
+          <RouterProvider router={routers} />
         </CoursesProvider>
-      </Provider>
-    </>
+      </IntlProvider>
+    </div>
   );
 }
 

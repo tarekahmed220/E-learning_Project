@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToWishlist, removeFromWishlist } from "../../Redux/wishlistSlice";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 function CourseItem({ course }) {
+  const translate = useSelector(state => state.language.translation);
+
   const [isFavorite, setIsFavorite] = useState(false);
   const dispatch = useDispatch();
 
@@ -14,13 +16,18 @@ function CourseItem({ course }) {
     if (isFavorite) {
       setIsFavorite(false);
       dispatch(removeFromWishlist(course.id));
-      toast.info("course deleted from your wish list");
+      toast.info(translate.messageDeleteFromWish);
     } else {
       setIsFavorite(true);
       dispatch(addToWishlist(course));
-      toast.success("course added to your wish list");
+      toast.success(translate.MessageAddedToWish);
     }
   };
+
+  const [enroll,setEnroll] = useState(false);
+  const handleAddToMyCourses = (course) =>{
+
+  }
 
   return (
     <div className="w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl ">
@@ -64,8 +71,8 @@ function CourseItem({ course }) {
           <p className="text-green-500">Free</p>
 
           <div className="ml-auto">
-            <button className="py-1 px-2 text-white bg-amber-600 hover:bg-amber-700 text-sm font-medium rounded-md">
-              Enroll
+            <button onClick={(course) => handleAddToMyCourses(course)} className="py-1 px-2 text-white bg-amber-600 hover:bg-amber-700 text-sm font-medium rounded-md">
+              {translate.Enroll}
             </button>
           </div>
         </div>
