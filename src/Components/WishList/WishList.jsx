@@ -13,6 +13,7 @@ function WishList() {
   };
 
   return (
+
     <div className="my-wishlist max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       <h1 className="text-3xl font-bold mb-6">{translate.MyWishlist}</h1>
       {wishlist.length > 0 ? (

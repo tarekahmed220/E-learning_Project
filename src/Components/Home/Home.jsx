@@ -1,12 +1,11 @@
+import { auth } from "../../firebase-config";
 import { useSelector } from "react-redux";
 import ButtonComponent from "./Components/buttonComponent";
 import "./home.css";
 
 export default function Home() {
   const items = Array.from({ length: 6 });
-
   const translate = useSelector((state) => state.language.translation);
-
   return (
     <div className="">
       <div className="">
