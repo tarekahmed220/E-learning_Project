@@ -1,9 +1,14 @@
+
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase-config";
 import { useAuthStatus } from "../../hooks/useAuthStatus";
 import { toast } from "react-toastify";
+
 import { useSelector } from "react-redux";
+import LanguageSwitcher from "../SwitchLang/LangSwitcher";
+
+
 
 export default function NavBar() {
   const [checklogin, setIsLogin] = useState(false);
@@ -16,7 +21,7 @@ export default function NavBar() {
   if (auth.currentUser) {
     userName = auth.currentUser.displayName.split(" ")[0];
   }
-
+  const translate = useSelector(state => state.language.translation);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -46,10 +51,8 @@ export default function NavBar() {
 
   // تابع للتحقق من المسار النشط
   const getLinkClassName = ({ isActive }) =>
-    `block py-2 pl-3 pr-4 rounded lg:p-0 ${
-      isActive ? "text-amber-700" : "text-gray-700"
-    } ${isActive ? "" : "hover:bg-gray-50"} ${
-      isActive ? "" : "border-b border-gray-100"
+    `block py-2 pl-3 pr-4 rounded lg:p-0 ${isActive ? "text-amber-700" : "text-gray-700"
+    } ${isActive ? "" : "hover:bg-gray-50"} ${isActive ? "" : "border-b border-gray-100"
     } lg:hover:bg-transparent lg:border-0 lg:hover:text-amber-500 lg:p-0 lg:dar`;
 
   function checkvalidity() {
@@ -62,11 +65,13 @@ export default function NavBar() {
     <>
       <nav className="bg-[#FFF8D9] border-gray-200 py-2.5">
         <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
-          <Link to="home">
-            <span className="self-center text-amber-700 text-xl font-semibold whitespace-nowrap font-mono">
-              Learnree - Learn Free
-            </span>
-          </Link>
+
+      <Link to="home">
+          <span className="self-center text-amber-700 text-xl font-semibold whitespace-nowrap font-mono">
+            {translate.Logo}
+          </span>
+       </Link>
+
 
           <div className="flex items-center lg:order-2">
             <div className="hidden mt-2 mr-4 sm:inline-block">
@@ -75,7 +80,9 @@ export default function NavBar() {
             {checklogin ? (
               <>
                 <p className="text-amber-700 font-medium me-3">
+
                   welcome: {userName}
+
                 </p>
                 <div className="profile">
                   <div className="dropdown">
@@ -87,9 +94,9 @@ export default function NavBar() {
                       />
                     </button>
                     <div className="dropdown-content">
-                      <a href="#">Edit Profile</a>
+                      <Link to="/Profile">{translate.EditProfile}</Link>
                       <a className="cursor-pointer" onClick={onLogout}>
-                        Logout
+                        {translate.Logout}
                       </a>
                     </div>
                   </div>
@@ -101,25 +108,25 @@ export default function NavBar() {
                   className="text-gray-500 hover:bg-slate-300 hover:bg-opacity-25 focus:ring-4 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 hover:bg-amber-text-amber-500 focus:outline-none"
                   to="login"
                 >
-                  Login
+                  {translate.Login}
                 </NavLink>
+
 
                 <NavLink
                   className="text-white bg-amber-600 hover:bg-amber-500 focus:ring-4 font-medium rounded-lg text-sm px-4 lg:px-5 py-3 lg:py-2 sm:ml-2 lg:mr-0 hover:bg-amber-text-amber-500 focus:outline-none"
                   to="register"
                 >
-                  Register now
+                  {translate.Register} {translate.now}
                 </NavLink>
               </>
             )}
-
             <button
               onClick={toggleMenu}
               className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
               aria-controls="mobile-menu-2"
               aria-expanded={isMenuOpen}
             >
-              <span className="sr-only">Open main menu</span>
+              <span className="sr-only">{translate.OpenMainMenu}</span>
               <svg
                 className="w-6 h-6"
                 fill="currentColor"
@@ -128,43 +135,41 @@ export default function NavBar() {
               >
                 <path
                   fillRule="evenodd"
-                  d={`M3 ${
-                    isMenuOpen ? "10" : "5"
-                  }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${
-                    isMenuOpen ? "5" : "10"
-                  }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${
-                    isMenuOpen ? "15" : "10"
-                  }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z`}
+                  d={`M3 ${isMenuOpen ? "10" : "5"
+                    }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${isMenuOpen ? "5" : "10"
+                    }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 ${isMenuOpen ? "15" : "10"
+                    }a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z`}
+
                   clipRule="evenodd"
                 />
               </svg>
             </button>
           </div>
           <div
-            className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${
-              isMenuOpen ? "" : "hidden"
-            }`}
+
+            className={`items-center justify-between w-full lg:flex lg:w-auto lg:order-1 ${isMenuOpen ? "" : "hidden"
+              }`}
             id="mobile-menu-2"
           >
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               <li>
-                <NavLink className={getLinkClassName} to="home">
-                  Home
+                <NavLink className={getLinkClassName} to="">
+                  {translate.Home}
                 </NavLink>
               </li>
               <li>
                 <NavLink className={getLinkClassName} to="about">
-                  About Us
+                  {translate.AboutUs}
                 </NavLink>
               </li>
               <li>
                 <NavLink className={getLinkClassName} to="courses">
-                  Courses
+                  {translate.Courses}
                 </NavLink>
               </li>
               <li>
                 <NavLink className={getLinkClassName} to="contact">
-                  Contact Us
+                  {translate.ContactUs}
                 </NavLink>
               </li>
               <li>
@@ -173,7 +178,7 @@ export default function NavBar() {
                   to="mycourses"
                   onClick={checkvalidity}
                 >
-                  My Courses
+                  {translate.MyCourses}
                 </NavLink>
               </li>
               <li>
@@ -182,11 +187,16 @@ export default function NavBar() {
                   to="mywishlist"
                   onClick={checkvalidity}
                 >
-                  My Wishlist
+                  {translate.MyWishlist}
                   <span className="text-black-200 font-normal border border-gray-400 rounded-full text-sm inline-block w-[20px] text-center ml-1 ">
                     {wishlistLength}
                   </span>
+
                 </NavLink>
+              </li>
+
+              <li>
+                <LanguageSwitcher></LanguageSwitcher>
               </li>
             </ul>
           </div>

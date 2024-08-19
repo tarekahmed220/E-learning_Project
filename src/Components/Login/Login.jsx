@@ -10,7 +10,11 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
 import loginImg from "../../assets/Banner-e-learning-concept-vector-design-removebg-preview.png";
 import { useCoursesContext } from "../../Context/CoursesProvider";
+import { useSelector } from "react-redux";
 export default function Login() {
+
+  const translate = useSelector((state) => state.language.translation);
+
   const { loginStatus } = useCoursesContext();
   const [showPassword, setShowPassword] = useState(false);
   const [isValid, setIsValid] = useState(false);
@@ -72,7 +76,7 @@ export default function Login() {
       );
       if (userCredential.user) {
         localStorage.setItem("isLoggedIn", "true");
-        navigate("/home");
+        navigate("/");
       }
     } catch (error) {
       if (error.code === "auth/user-not-found") {
@@ -102,7 +106,7 @@ export default function Login() {
         </div>
         <div className="rounded-md login w-full lg:w-[50%] bg-white p-5 z-10  absolute top-[51%] left-1/2 transform -translate-x-1/2 -translate-y-1/2">
           <h1 className="text-center font-semibold text-4xl font-mono text-[#3d3e5c]">
-            Login
+            {translate.Login}
           </h1>
 
           <form onSubmit={handleSubmit}>
@@ -115,7 +119,7 @@ export default function Login() {
               id="email"
               value={email}
               onChange={(e) => onChange(e)}
-              placeholder="Enter Your Email"
+              placeholder={translate.EnterYourEmail}
             />
             {errors.email && (
               <span className="text-red-500">{errors.email}</span>
@@ -131,7 +135,7 @@ export default function Login() {
                 pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%*])[A-Za-z\d@#$%*]{8,20}$"
                 value={password}
                 onChange={(e) => onChange(e)}
-                placeholder="Enter Your Password"
+                placeholder={translate.EnterYourPassword}
               />
               {showPassword ? (
                 <RiEyeOffFill
@@ -152,19 +156,18 @@ export default function Login() {
               className="cursor-pointer text-[#2e4b70]  mt-4 block"
               to="/forgotpassword"
             >
-              Forgot Your Password?
+              {translate.ForgotYourPassword}
             </Link>
             <button
               type="submit"
               disabled={!isValid}
-              className={`mt-3 bg-[#d3a058] hover:bg-[#d3a058da] py-2 px-7 rounded-md text-white font-semibold ${
-                !isValid ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+              className={`mt-3 bg-[#d3a058] hover:bg-[#d3a058da] py-2 px-7 rounded-md text-white font-semibold ${!isValid ? "opacity-50 cursor-not-allowed" : ""
+                }`}
             >
-              Login
+              {translate.Login}
             </button>
             <div className="flex before:border-t before:flex-1 before:border-gray-300 justify-center items-center  my-4 after:border-t after:flex-1 after:border-gray-300">
-              <p className="text-center mx-4 ">OR</p>
+              <p className="text-center mx-4 ">{translate.OR}</p>
             </div>
             <OAuth />
           </form>
