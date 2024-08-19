@@ -10,8 +10,11 @@ import { auth, db } from "../../firebase-config";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import registerImg from "../../assets/register.png";
+import { useSelector } from "react-redux";
 
 export default function Register() {
+  const translate = useSelector((state) => state.language.translation);
+
   const fullNameInput = useRef(null);
   const emailInput = useRef(null);
   const phoneInput = useRef(null);
@@ -151,23 +154,27 @@ export default function Register() {
     <div className="layout bg-gradient-to-r h-[94vh]">
       <div className="text bg-gradient-to-r pt-[60px]">
         <div className="registerForm bg-white shadow-xl px-3 lg:pl-[60px] container mx-auto min-h-[600px] py-[40px] rounded-xl ">
-          <h2 className="hero-text text-2xl font-bold mr-6 mb-4 ">Welcome</h2>
+          <h2 className="hero-text text-2xl font-bold mr-6 mb-4 ">
+            {translate.Welcome}
+          </h2>
           <h2>
             <span className="font-bold text-xs ">
-              Already have an account?
+              {translate.AlreadyHaveAnAccount}
               <FaCaretRight className="inline text-lg mb-1 mr-3" />
             </span>
             <Link to="/login" className="hero-text font-bold ">
-              Signin
+              {translate.Signin}
             </Link>
           </h2>
-          <h3 className="text-[#d3a058] font-bold mb-10 mt-5">Register Now</h3>
+          <h3 className="text-[#d3a058] font-bold mb-10 mt-5">
+            {translate.RegisterNow}
+          </h3>
           <div className="box flex flex-col-reverse md:flex-row">
             <form
               className="flex flex-col w-full lg:w-1/2 "
               onSubmit={(e) => handleSubmit(e)}
             >
-              <label htmlFor="fullName">Full Name</label>
+              <label htmlFor="fullName">{translate.FullName}</label>
               <input
                 ref={fullNameInput}
                 style={{ border: errors.fullName !== "" && "1px solid red" }}
@@ -182,7 +189,7 @@ export default function Register() {
               {errors.fullName && (
                 <span className="text-red-500">{errors.fullName}</span>
               )}
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">{translate.Email}</label>
               <input
                 ref={emailInput}
                 style={{ border: errors.email !== "" && "1px solid red" }}
@@ -199,7 +206,7 @@ export default function Register() {
               )}
               <div className="flex justify-between items-center flex-col md:flex-row gap-3">
                 <div className="select flex flex-col flex-1 w-full">
-                  <label htmlFor="country">Country</label>
+                  <label htmlFor="country">{translate.Country}</label>
                   <select
                     className="bg-[#fffde5] border-gray-300 border rounded-md outline-none py-1 px-3 w-full"
                     name="country"
@@ -207,15 +214,17 @@ export default function Register() {
                     value={country}
                     onChange={(e) => onChange(e)}
                   >
-                    <option value="egypt">Egypt</option>
-                    <option value="saudi arabia">Saudi Arabia</option>
-                    <option value="morocco">Morocco</option>
-                    <option value="jordan">Jordan</option>
+                    <option value="egypt">{translate.Egypt}</option>
+                    <option value="saudi arabia">
+                      {translate.SaudiArabia}
+                    </option>
+                    <option value="morocco">{translate.Morocco}</option>
+                    <option value="jordan">{translate.Jordan}</option>
                   </select>
                 </div>
                 <div className="city flex flex-col flex-1 w-full">
                   <label htmlFor="city" className="mt-4">
-                    City
+                    {translate.City}
                   </label>
                   <input
                     ref={cityInput}
@@ -233,7 +242,7 @@ export default function Register() {
                   )}
                 </div>
               </div>
-              <label htmlFor="phone">Phone Number</label>
+              <label htmlFor="phone">{translate.PhoneNumber}</label>
               <input
                 ref={phoneInput}
                 style={{ border: errors.phone !== "" && "1px solid red" }}
@@ -248,7 +257,7 @@ export default function Register() {
               {errors.phone && (
                 <span className="text-red-500">{errors.phone}</span>
               )}
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">{translate.Password}</label>
               <div className="relative">
                 <input
                   ref={passwordInput}
@@ -276,7 +285,7 @@ export default function Register() {
               {errors.password && (
                 <span className="text-red-500">{errors.password}</span>
               )}
-              <label htmlFor="repassword">Confirm Password</label>
+              <label htmlFor="repassword">{translate.ConfirmPassword}</label>
               <div className="relative">
                 <input
                   ref={repasswordInput}
@@ -307,7 +316,9 @@ export default function Register() {
                 <span className="text-red-500">{errors.repassword}</span>
               )}
               {password && repassword && password !== repassword && (
-                <span className="text-red-500">Passwords do not match.</span>
+                <span className="text-red-500">
+                  {translate.PasswordsDoNotMatch}
+                </span>
               )}
               <button
                 type="submit"
@@ -316,10 +327,10 @@ export default function Register() {
                   !isValid ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
-                Register
+                {translate.Register}
               </button>
               <div className="flex before:border-t before:flex-1 before:border-gray-300 justify-center items-center  my-4 after:border-t after:flex-1 after:border-gray-300">
-                <p className="text-center mx-4">OR</p>
+                <p className="text-center mx-4">{translate.OR}</p>
               </div>
               <OAuth />
             </form>

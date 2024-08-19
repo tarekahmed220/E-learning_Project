@@ -9,9 +9,14 @@ import { useEffect, useState } from "react";
 import { db } from "../../firebase-config";
 import CourseItem from "./CourseItem";
 import Spinner from "../Spinner";
+import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 
+
 export default function Courses() {
+
+  const translate = useSelector(state => state.language.translation);
+
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [lastVisible, setLastVisible] = useState(null);
@@ -90,11 +95,11 @@ export default function Courses() {
   return (
     <div className="layout w-full pb-24">
       <div className="text-center p-10">
-        <h1 className="font-bold text-4xl mb-4">All Courses</h1>
+        <h1 className="font-bold text-4xl mb-4">{translate.AllCourses}</h1>
         <div className="flex justify-center space-x-2">
           <input
             type="text"
-            placeholder="Search for courses..."
+            placeholder={translate.SearchForCourses}
             value={searchTerm}
             onChange={handleSearch}
             pattern="[A-Za-z\s]*"
@@ -104,7 +109,7 @@ export default function Courses() {
             onClick={handleSearchClick}
             className="px-4 py-2 bg-[#d97706] hover:bg-[#d97706d7] transition ease-in-out text-white rounded"
           >
-            Search
+            {translate.Search}
           </button>
         </div>
       </div>
@@ -127,7 +132,7 @@ export default function Courses() {
           disabled={loading || searching}
           className="mt-4 px-4 py-2 bg-[#d97706] hover:bg-[#d97706d7] transition ease-in-out text-white rounded mx-auto"
         >
-          {loading ? <Spinner /> : "Load More"}
+          {loading ? <Spinner /> : `${translate.LoadMore}`}
         </button>
       </div>
     </div>
