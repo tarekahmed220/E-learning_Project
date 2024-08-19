@@ -21,11 +21,10 @@ import UpdateCourse from "./Admin/Components/UpdateCourse/UpdateCourse";
 import AddCourse from "./Admin/Components/AddCourse/AddCourse";
 import CourseDetails from "./Components/ProductDetails/CourseDetails";
 import { store } from "./Redux/store";
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import CourseDetailsAdmin from "./Admin/Components/AdminPage/CourseDetailsAdmin";
 import { Provider, useSelector } from "react-redux";
 import { IntlProvider } from "react-intl";
-
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 
 let routers = createBrowserRouter([
@@ -43,6 +42,7 @@ let routers = createBrowserRouter([
       },
 
       { path: "/courses/:id", element: <CourseDetails /> },
+      { path: "/admin/courses/:id", element: <CourseDetailsAdmin /> },
 
       {
         path: "mywishlist",
@@ -55,7 +55,7 @@ let routers = createBrowserRouter([
       { path: "/forgotpassword", element: <ForgotPassword /> },
       { path: "profile", element: <Profile /> },
       { path: "*", element: <Notfound /> },
-      // { path: "create", element: <CreateCourse /> },
+
     ],
   },
   {
@@ -68,7 +68,7 @@ let routers = createBrowserRouter([
     ],
   },
 ]);
-let query = new QueryClient
+let query = new QueryClient();
 function App() {
   return (
     <>
@@ -92,7 +92,6 @@ function App() {
           </CoursesProvider>
         </Provider>
       </QueryClientProvider>
-
     </>
 
   );

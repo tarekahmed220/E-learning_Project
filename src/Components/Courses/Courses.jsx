@@ -121,7 +121,9 @@ export default function Courses() {
         {isLoading ? (
           <Spinner />
         ) : (
-          courses.map((course) => <CourseItem course={course} key={course.id} />)
+          courses.map((course) => (
+            <CourseItem course={course} key={course.id} />
+          ))
         )}
       </section>
       <div className="flex justify-center">
