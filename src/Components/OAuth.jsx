@@ -25,7 +25,7 @@ function OAuth() {
           timestamp: serverTimestamp(),
         });
       }
-      navigate("/home");
+      navigate("/");
       setIsLoading(false);
     } catch (error) {
       console.error("Error during Google Sign-In:", error);
