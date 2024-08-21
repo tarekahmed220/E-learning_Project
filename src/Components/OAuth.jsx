@@ -20,9 +20,12 @@ function OAuth() {
       const docSnap = await getDoc(docRef);
       if (!docSnap.exists()) {
         await setDoc(docRef, {
-          name: user.displayName,
-          email: user.email,
-          timestamp: serverTimestamp(),
+          data: {
+            fullName: user.displayName,
+            email: user.email,
+            timestamp: serverTimestamp(),
+          },
+          myCourses: {},
         });
       }
       navigate("/");
