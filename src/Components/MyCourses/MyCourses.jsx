@@ -43,11 +43,11 @@ export default function MyCourses() {
           <section className="flex justify-center gap-5">
           {isLoading ? (
           <Spinner />
-        ) : (
+        ) : myCourses.length > 0 ? (
           myCourses.map((course) => (
             <CourseItem course={course} key={course.id} />
           ))
-        )}
+        ) : <div>no courses</div>  }
           </section>
         </div>
       </div>
