@@ -80,6 +80,7 @@ const EN = {
   Password: "Password",
   Login: "Login",
   EnterYourEmail: "Enter Your Email",
+  EnterYourPassword: "Enter Your Password",
   Register: "Register",
   ForgotYourPassword: "Forgot Your Password?",
   OR: "OR",
@@ -102,6 +103,10 @@ const EN = {
   Lang: "Lang",
   Arabic: "Arabic",
   English: "English",
+  // profile
+  UpdateUserData: "Data updated successfully.",
+  DeleteAccount: "Delete Account",
+  DeleteAccountDone: "Delete Account Done",
 };
 
 export default EN;

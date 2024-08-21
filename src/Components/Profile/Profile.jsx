@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { auth, db } from "../../firebase-config";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import ButtonComponent from "../ButtonComponent";
+import Spinner from "../Spinner";
 
 export default function Profile() {
   //   // const x = 5;
@@ -24,7 +28,9 @@ export default function Profile() {
   //   console.log("No such document!");
   // }
 
-  const translate = useSelector(state => state.language.translation);
+  const user = auth.currentUser;
+  const translate = useSelector((state) => state.language.translation);
+  const navigate = useNavigate();
 
   const [userData, setUserData] = useState({
     fullName: "",
@@ -33,7 +39,15 @@ export default function Profile() {
     country: "",
     city: "",
   }); // لتخزين بيانات المستخدم
-  const [loading, setLoading] = useState(true); // لتتبع حالة التحميل
+
+  const [originalUserData, setOriginalUserData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    country: "",
+    city: "",
+  });
+  const [isLoading, setIsLoading] = useState(true); // لتتبع حالة التحميل
   const [error, setError] = useState({
     fullNameError: "",
     phoneError: "",
@@ -43,13 +57,13 @@ export default function Profile() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const user = auth.currentUser; // الحصول على المستخدم الحالي
         if (user) {
           const docRef = doc(db, "users", user.uid); // مرجع الوثيقة في Firestore
           const docSnap = await getDoc(docRef); // جلب بيانات الوثيقة
 
           if (docSnap.exists()) {
-            setUserData(docSnap.data());
+            setUserData(docSnap.data().data);
+            setOriginalUserData(docSnap.data().data);
             console.log(docSnap.data());
 
             // تحديث حالة userData بالبيانات المستلمة
@@ -72,7 +86,7 @@ export default function Profile() {
         }); // التعامل مع الأخطاء
         console.error("Error fetching user data:", err);
       } finally {
-        setLoading(false); // تحديد أن الجلب قد اكتمل
+        setIsLoading(false); // تحديد أن الجلب قد اكتمل
       }
     };
 
@@ -109,15 +123,17 @@ export default function Profile() {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleUpdateData = async (e) => {
     e.preventDefault();
 
     try {
       const user = auth.currentUser;
       if (user) {
         const docRef = doc(db, "users", user.uid);
-        await updateDoc(docRef, userData);
-        console.log("User data updated successfully!");
+        await updateDoc(docRef, {
+          data: userData,
+        });
+        toast.success(translate.UpdateUserData);
       } else {
         setError({
           ...error,
@@ -138,121 +154,166 @@ export default function Profile() {
     iconUpdate ? setIconUpdate(false) : setIconUpdate(true);
   };
 
-  if (loading) return <p>Loading...</p>; // عرض رسالة التحميل أثناء انتظار البيانات
-  if (error.generalError) return <p>{error.generalError}</p>;
+  const handleCancelBtn = (e) => {
+    e.preventDefault();
+    setUserData(originalUserData);
+  };
+
+  const handleDeleteAccount = async (e) => {
+    e.preventDefault();
+    if (user) {
+      try {
+        const docRef = doc(db, "users", user.uid);
+        console.log(docRef);
+        await deleteDoc(docRef);
+        await user.delete();
+
+        toast.success(translate.DeleteAccountDone);
+        navigate("/login");
+      } catch (error) {
+        toast.error(error.message);
+        console.log(error.message);
+      }
+    }
+  };
+
+  // if (isLoading) return <p>Loading...</p>; // عرض رسالة التحميل أثناء انتظار البيانات
+  // if (error.generalError) return <p>{error.generalError}</p>;
 
   return (
-    <>
-      <section className="layout py-12">
-        <div className="w-full px-10 md:w-3/4 lg:w-1/2 m-auto">
-          <div className="m-auto rounded bg-white relative">
-            <figure className="w-10" onClick={handleToUpdate}>
-              <img src="../../../public/update-icon.png" alt="" />
-            </figure>
-            <h4 className="text-2xl font-bold text-center pt-[100px]">
-              {translate.EditYourProfileDetails}
-            </h4>
-            <form onSubmit={(e) => handleSubmit(e)} className="px-[10%] py-10">
-              <figure className="w-[80px] absolute left-1/2 -translate-x-1/2 top-[-40px]">
-                <img
-                  className="w-full"
-                  src="../../../public/undraw_pic_profile_re_7g2h.svg"
-                  alt=""
-                />
+    <div className="">
+      {isLoading ? (
+        <Spinner></Spinner>
+      ) : (
+        <section className="layout py-12">
+          <div className="w-full px-10 md:w-3/4 lg:w-1/2 m-auto">
+            <div className="m-auto rounded bg-white relative">
+              <figure className="w-10" onClick={handleToUpdate}>
+                <img src="../../../public/update-icon.png" alt="" />
               </figure>
-              <div className="my-4">
-                <label className="font-bold" htmlFor="">
-                  {translate.FullName}
-                </label>
-                <input
-                  className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
-                  type="text"
-                  pattern="^[a-zA-Z\s]{2,50}$"
-                  name="fullName"
-                  value={userData.fullName}
-                  onChange={iconUpdate ? (e) => handleUserData(e) : null}
-                />
-                {error.fullNameError && (
-                  <span className="text-red-500">{error.fullNameError}</span>
-                )}
-              </div>
-
-              <div className="my-4">
-                <label className="font-bold" htmlFor="">
-                  {translate.Email}
-                </label>
-                <input
-                  className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
-                  type="text"
-                  value={userData.email}
-                  readOnly
-                />
-              </div>
-
-              <div className="my-4 grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div>
+              <h4 className="text-2xl font-bold text-center pt-[100px]">
+                {translate.EditYourProfileDetails}
+              </h4>
+              <form className="px-[10%] py-10">
+                <figure className="w-[80px] absolute left-1/2 -translate-x-1/2 top-[-40px]">
+                  <img
+                    className="w-full"
+                    src="../../../public/undraw_pic_profile_re_7g2h.svg"
+                    alt=""
+                  />
+                </figure>
+                <div className="my-4">
                   <label className="font-bold" htmlFor="">
-                    {translate.Country}
+                    {translate.FullName}
                   </label>
                   <input
                     className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
                     type="text"
-                    value={userData.country}
-                    readOnly
+                    pattern="^[a-zA-Z\s]{2,50}$"
+                    name="fullName"
+                    value={userData.fullName}
+                    onChange={iconUpdate ? (e) => handleUserData(e) : null}
                   />
+                  {error.fullNameError && (
+                    <span className="text-red-500">{error.fullNameError}</span>
+                  )}
                 </div>
-                <div>
+
+                <div className="my-4">
                   <label className="font-bold" htmlFor="">
-                    {translate.City}
+                    {translate.Email}
                   </label>
                   <input
                     className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
                     type="text"
-                    value={userData.city}
+                    value={userData.email}
                     readOnly
                   />
                 </div>
-              </div>
 
-              <div className="my-4">
-                <label className="font-bold" htmlFor="">
-                  {translate.PhoneNumber}
-                </label>
-                <input
-                  className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
-                  type="text"
-                  name="phone"
-                  defaultValue={userData.phone}
-                  onChange={(e) => handleUserData(e)}
-                />
-                {error.phoneError && (
-                  <span className="text-red-500">{error.phoneError}</span>
-                )}
-              </div>
+                <div className="my-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div>
+                    <label className="font-bold" htmlFor="">
+                      {translate.Country}
+                    </label>
+                    <input
+                      className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
+                      type="text"
+                      value={userData.country}
+                      readOnly
+                    />
+                  </div>
+                  <div>
+                    <label className="font-bold" htmlFor="">
+                      {translate.City}
+                    </label>
+                    <input
+                      className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
+                      type="text"
+                      value={userData.city}
+                      readOnly
+                    />
+                  </div>
+                </div>
 
-              <div className="my-4">
-                <label className="font-bold" htmlFor="">
-                  {translate.ResetPassword}
-                </label>
-                <input
-                  className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
-                  type="text"
-                  placeholder="password"
-                />
-              </div>
+                <div className="my-4">
+                  <label className="font-bold" htmlFor="">
+                    {translate.PhoneNumber}
+                  </label>
+                  <input
+                    className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
+                    type="text"
+                    name="phone"
+                    value={userData.phone}
+                    onChange={iconUpdate ? (e) => handleUserData(e) : null}
+                  />
+                  {error.phoneError && (
+                    <span className="text-red-500">{error.phoneError}</span>
+                  )}
+                </div>
 
-              <div className="mt-10 flex justify-between flex-col md:flex-row gap-5 md:gap-0">
-                <button className="bg-[#676767] px-4 py-1 rounded-md">
-                  {translate.Cancel}
-                </button>
-                <button className="bg-[#EFA400] px-4 py-1 text-white rounded-md">
-                  {translate.UpdateProfile}
-                </button>
-              </div>
-            </form>
+                <div className="my-4">
+                  <label className="font-bold" htmlFor="">
+                    {translate.ResetPassword}
+                  </label>
+                  <input
+                    className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
+                    type="text"
+                    placeholder="password"
+                  />
+                </div>
+
+                <div className="mt-10 flex justify-between flex-col md:flex-row gap-5 md:gap-0">
+                  {/* <button onClick={(e) => handleCancelBtn(e)} className="bg-[#676767] px-4 py-1 rounded-md">
+                    {translate.Cancel}
+                  </button> */}
+                  <ButtonComponent
+                    onClick={(e) => handleCancelBtn(e)}
+                    nameBtn={translate.Cancel}
+                  ></ButtonComponent>
+                  <button
+                    onClick={(e) => handleUpdateData(e)}
+                    className="bg-[#EFA400] px-4 py-1 text-white rounded-md"
+                  >
+                    {translate.UpdateProfile}
+                  </button>
+                </div>
+                {/* <button onClick={(e) => handleDeleteAccount(e)} className="bg-[#EFA400] px-4 mt-7 py-1 w-full text-white rounded-md">
+                    {translate.DeleteAccount}
+                </button> */}
+                <ButtonComponent
+                  onClick={(e) => handleDeleteAccount(e)}
+                  nameBtn={translate.DeleteAccount}
+                  w="full"
+                  mt="7"
+                  bg="--colorOrange"
+                  colorText="--colorWhite"
+                ></ButtonComponent>
+              </form>
+            </div>
           </div>
-        </div>
-      </section>
-    </>
+        </section>
+      )}
+    </div>
   );
 }

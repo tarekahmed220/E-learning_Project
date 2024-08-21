@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToWishlist, removeFromWishlist } from "../../Redux/wishlistSlice";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { auth, db } from "../../firebase-config";
+import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 
 function CourseItem({ course }) {
-  const translate = useSelector(state => state.language.translation);
+  const translate = useSelector((state) => state.language.translation);
 
   const [isFavorite, setIsFavorite] = useState(false);
   const dispatch = useDispatch();
@@ -24,10 +26,50 @@ function CourseItem({ course }) {
     }
   };
 
-  const [enroll,setEnroll] = useState(false);
-  const handleAddToMyCourses = (course) =>{
+  const user = auth.currentUser;
 
-  }
+  // const [enroll, setEnroll] = useState([]);
+  // useEffect(() => {
+  //   const fetchUserCourses = async () => {
+  //     try{
+  //       if(user){
+  //         const docRef = (doc(db,"users",user.uid));
+  //         const docSnap = await getDoc(docRef);
+  //         if(docSnap.exists()){
+  //           // setEnroll(docSnap.data().myCourses || [])
+  //           console.log(docSnap.data().myCourses || []);
+  //         }
+  //       }
+  //     }catch (error){
+  //       console.log(error);
+  //     }
+  //   };
+
+  //   fetchUserCourses();
+  // }, []);
+
+  const handleAddToMyCourses = async (course) => {
+    console.log(course.id);
+    try{
+      console.log(user);
+      // setEnroll({
+      //   ...enroll,
+      //   course: course.id,
+      // })
+      // const updatedCourses = { ...enroll,};
+      
+      if(user){
+        const docRef = (doc(db, "users",user.uid));
+        await updateDoc(docRef,{
+          myCourses: arrayUnion(course)
+        })
+        // setEnroll(enroll , course.id);
+      }
+    }catch (error){
+      console.log(error);
+      
+    }
+  };
 
   return (
     <div className="w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl ">
@@ -71,7 +113,10 @@ function CourseItem({ course }) {
           <p className="text-green-500">Free</p>
 
           <div className="ml-auto">
-            <button onClick={(course) => handleAddToMyCourses(course)} className="py-1 px-2 text-white bg-amber-600 hover:bg-amber-700 text-sm font-medium rounded-md">
+            <button
+              onClick={() => handleAddToMyCourses(course)}
+              className="py-1 px-2 text-white bg-amber-600 hover:bg-amber-700 text-sm font-medium rounded-md"
+            >
               {translate.Enroll}
             </button>
           </div>
