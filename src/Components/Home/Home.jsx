@@ -1,6 +1,5 @@
-import { auth } from "../../firebase-config";
 import { useSelector } from "react-redux";
-import ButtonComponent from "./Components/ButtonComponent";
+import ButtonComponent from "../ButtonComponent";
 import "./home.css";
 
 export default function Home() {

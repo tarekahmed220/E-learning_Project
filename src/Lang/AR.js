@@ -103,6 +103,11 @@ const AR = {
   Lang: "اللغة",
   Arabic: "العربية",
   English: "الانجليزية",
+  
+  // profile
+  UpdateUserData: ".تم تحديث البيانات بنجاح",
+  DeleteProfile: "حذف الاكونت",
+  DeleteAccountDone: "تم حذف الاكونت",
 };
 
 export default AR;

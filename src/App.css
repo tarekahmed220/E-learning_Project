@@ -9,6 +9,12 @@ html {
   scrollbar-width: none;
 } */
 
+:root{
+  --colorOrange : #EFA400;
+  --colorBgNumbers: #FCDDB4;
+  --colorWhite: #ffffff;
+}
+
 .layout {
   background: rgb(255, 248, 217);
   background: linear-gradient(

@@ -23,7 +23,7 @@ import CourseDetails from "./Components/ProductDetails/CourseDetails";
 import { store } from "./Redux/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CourseDetailsAdmin from "./Admin/Components/AdminPage/CourseDetailsAdmin";
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 // import { IntlProvider } from "react-intl";
 
 let routers = createBrowserRouter([

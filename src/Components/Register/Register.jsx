@@ -120,11 +120,22 @@ export default function Register() {
       await updateProfile(auth.currentUser, {
         displayName: fullName,
       });
-      const formDataCopy = { ...formData };
+
+      // update Ahmed
+      const formDataCopy = {
+        data: {
+          ...formData,
+          role: "user",
+          timestamp: serverTimestamp(),
+        },
+        myCourses: {},
+      };
       delete formDataCopy.password;
       delete formDataCopy.repassword;
-      formDataCopy.timestamp = serverTimestamp();
-      formDataCopy.role = "user";
+      // formDataCopy.timestamp = serverTimestamp();
+      // formDataCopy.role = "user";
+      console.log(formData);
+
       await setDoc(doc(db, "users", user.uid), formDataCopy);
       navigate("/home");
     } catch (error) {
