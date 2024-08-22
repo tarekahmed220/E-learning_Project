@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import ButtonComponent from "../ButtonComponent";
+import ButtonComponent from "../Home/Components/ButtonComponent";
 import Spinner from "../Spinner";
 
 export default function Profile() {
@@ -38,7 +38,8 @@ export default function Profile() {
     phone: "",
     country: "",
     city: "",
-  }); // لتخزين بيانات المستخدم
+  });
+
 
   const [originalUserData, setOriginalUserData] = useState({
     fullName: "",
@@ -47,23 +48,26 @@ export default function Profile() {
     country: "",
     city: "",
   });
-  const [isLoading, setIsLoading] = useState(true); // لتتبع حالة التحميل
+
+  const [isLoading, setIsLoading] = useState(true);
+
   const [error, setError] = useState({
     fullNameError: "",
     phoneError: "",
     generalError: "",
-  }); // لتخزين رسالة الخطأ في حال حدوثه
+  });
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         if (user) {
-          const docRef = doc(db, "users", user.uid); // مرجع الوثيقة في Firestore
-          const docSnap = await getDoc(docRef); // جلب بيانات الوثيقة
+          const docRef = doc(db, "users", user.uid);
+          const docSnap = await getDoc(docRef);
 
           if (docSnap.exists()) {
-            setUserData(docSnap.data().data);
-            setOriginalUserData(docSnap.data().data);
+            setUserData(docSnap.data());
+            setOriginalUserData(docSnap.data());
+
             console.log(docSnap.data());
 
             // تحديث حالة userData بالبيانات المستلمة
@@ -102,7 +106,6 @@ export default function Profile() {
         ...userData,
         fullName: e.target.value,
       });
-      console.log(userData);
       setError({
         ...error,
         fullNameError:
@@ -128,11 +131,10 @@ export default function Profile() {
 
     try {
       const user = auth.currentUser;
+      console.log(user);
       if (user) {
         const docRef = doc(db, "users", user.uid);
-        await updateDoc(docRef, {
-          data: userData,
-        });
+        await updateDoc(docRef, userData);
         toast.success(translate.UpdateUserData);
       } else {
         setError({
@@ -211,7 +213,8 @@ export default function Profile() {
                     type="text"
                     pattern="^[a-zA-Z\s]{2,50}$"
                     name="fullName"
-                    value={userData.fullName}
+                    value={userData.fullName || ""}
+
                     onChange={iconUpdate ? (e) => handleUserData(e) : null}
                   />
                   {error.fullNameError && (
@@ -221,7 +224,8 @@ export default function Profile() {
 
                 <div className="my-4">
                   <label className="font-bold" htmlFor="">
-                    {translate.Email}
+                    {translate.Email || ""}
+
                   </label>
                   <input
                     className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
@@ -239,7 +243,7 @@ export default function Profile() {
                     <input
                       className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
                       type="text"
-                      value={userData.country}
+                      value={userData.country || ""}
                       readOnly
                     />
                   </div>
@@ -250,7 +254,8 @@ export default function Profile() {
                     <input
                       className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
                       type="text"
-                      value={userData.city}
+                      value={userData.city || ""}
+
                       readOnly
                     />
                   </div>
@@ -259,12 +264,14 @@ export default function Profile() {
                 <div className="my-4">
                   <label className="font-bold" htmlFor="">
                     {translate.PhoneNumber}
+
                   </label>
                   <input
                     className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
                     type="text"
+
                     name="phone"
-                    value={userData.phone}
+                    value={userData.phone || ""}
                     onChange={iconUpdate ? (e) => handleUserData(e) : null}
                   />
                   {error.phoneError && (
@@ -301,14 +308,8 @@ export default function Profile() {
                 {/* <button onClick={(e) => handleDeleteAccount(e)} className="bg-[#EFA400] px-4 mt-7 py-1 w-full text-white rounded-md">
                     {translate.DeleteAccount}
                 </button> */}
-                <ButtonComponent
-                  onClick={(e) => handleDeleteAccount(e)}
-                  nameBtn={translate.DeleteAccount}
-                  w="full"
-                  mt="7"
-                  bg="--colorOrange"
-                  colorText="--colorWhite"
-                ></ButtonComponent>
+
+
               </form>
             </div>
           </div>

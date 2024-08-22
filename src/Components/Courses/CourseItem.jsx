@@ -8,6 +8,10 @@ import { auth, db } from "../../firebase-config";
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 
 function CourseItem({ course }) {
+
+  const [isdisable, setisDisable] = useState(false);
+
+
   const translate = useSelector((state) => state.language.translation);
 
   const [isFavorite, setIsFavorite] = useState(false);
@@ -28,46 +32,20 @@ function CourseItem({ course }) {
 
   const user = auth.currentUser;
 
-  // const [enroll, setEnroll] = useState([]);
-  // useEffect(() => {
-  //   const fetchUserCourses = async () => {
-  //     try{
-  //       if(user){
-  //         const docRef = (doc(db,"users",user.uid));
-  //         const docSnap = await getDoc(docRef);
-  //         if(docSnap.exists()){
-  //           // setEnroll(docSnap.data().myCourses || [])
-  //           console.log(docSnap.data().myCourses || []);
-  //         }
-  //       }
-  //     }catch (error){
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   fetchUserCourses();
-  // }, []);
-
   const handleAddToMyCourses = async (course) => {
-    console.log(course.id);
-    try{
+    setisDisable(true);
+    try {
       console.log(user);
-      // setEnroll({
-      //   ...enroll,
-      //   course: course.id,
-      // })
-      // const updatedCourses = { ...enroll,};
-      
-      if(user){
-        const docRef = (doc(db, "users",user.uid));
-        await updateDoc(docRef,{
-          myCourses: arrayUnion(course)
-        })
-        // setEnroll(enroll , course.id);
+
+      if (user) {
+        const docRef = doc(db, "users", user.uid);
+        await updateDoc(docRef, {
+          myCourses: arrayUnion(course),
+        });
+        toast.success("course successfully added to your courses");
       }
-    }catch (error){
+    } catch (error) {
       console.log(error);
-      
     }
   };
 
@@ -114,8 +92,14 @@ function CourseItem({ course }) {
 
           <div className="ml-auto">
             <button
+              disabled={isdisable}
               onClick={() => handleAddToMyCourses(course)}
-              className="py-1 px-2 text-white bg-amber-600 hover:bg-amber-700 text-sm font-medium rounded-md"
+              className={`${
+                isdisable
+                  ? "bg-gray-300 cursor-not-allowed"
+                  : "bg-amber-600  hover:bg-amber-700"
+              } py-1 px-2 text-white text-sm font-medium rounded-md`}
+
             >
               {translate.Enroll}
             </button>

@@ -6,9 +6,9 @@ import {
   startAfter,
   addDoc,
   orderBy,
+  Timestamp,
 } from "firebase/firestore";
 
-// Firebase Storage imports
 import {
   getStorage,
   ref,
@@ -50,10 +50,15 @@ export default function Admin() {
   async function fetchCourses() {
     setLoading(true);
     try {
-      // FIXME: orderBy("timestamp", "desc") there is no timeStamp in any course
       const coursesCollection = collection(db, "courses");
-      let q = query(coursesCollection, limit(20));
+      let q = query(coursesCollection, limit(50));
       const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        console.log("No courses found.");
+        setCourses([]);
+        return;
+      }
 
       const coursesList = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -86,7 +91,7 @@ export default function Admin() {
     setLoading(true);
     try {
       const coursesCollection = collection(db, "courses");
-      const q = query(coursesCollection, startAfter(lastVisible), limit(20));
+      const q = query(coursesCollection, startAfter(lastVisible), limit(50));
       const querySnapshot = await getDocs(q);
 
       const coursesList = querySnapshot.docs.map((doc) => ({
@@ -154,9 +159,8 @@ export default function Admin() {
       return;
     }
 
-    setLoading(true);
-
     async function storeImages(image) {
+      setLoading(true);
       return new Promise((res, rej) => {
         const storage = getStorage();
         const imageName = `${auth.currentUser.uid}-${uuidv4()}`;
@@ -202,6 +206,7 @@ export default function Admin() {
       toast.success("Images uploaded successfully");
 
       const formCopy = {
+        timestamp: Timestamp.now(),
         image_480x270: imgUrls[0],
         title: NewCourseName,
         visible_instructors: [
@@ -212,9 +217,11 @@ export default function Admin() {
       const docRef = await addDoc(collection(db, "courses"), formCopy);
       toast.success("Course added successfully");
       navigate(`/admin/courses/${docRef.id}`);
+      setLoading(false);
     } catch (error) {
       console.log(error);
       toast.error("Sorry, can't add this course");
+      setLoading(false);
     } finally {
       setLoading(false);
       setShowForm(false);
@@ -254,7 +261,7 @@ export default function Admin() {
             onClick={() => setShowForm(true)}
           >
             Add Product
-          </button>{" "}
+          </button>
         </div>
         {showForm && (
           <div className="add w-screen z-10 mx-auto bg-gray-500 bg-opacity-45 flex justify-center items-center shadow-md fixed bottom-0 top-0 right-0 left-0">

@@ -2,8 +2,11 @@ import {
   collection,
   getDocs,
   limit,
+  orderBy,
   query,
   startAfter,
+  Timestamp,
+  writeBatch,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase-config";
@@ -12,11 +15,8 @@ import Spinner from "../Spinner";
 import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 
-
 export default function Courses() {
-
-  const translate = useSelector(state => state.language.translation);
-
+  const translate = useSelector((state) => state.language.translation);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [lastVisible, setLastVisible] = useState(null);
@@ -59,7 +59,12 @@ export default function Courses() {
     setLoading(true);
     try {
       const coursesCollection = collection(db, "courses");
-      const q = query(coursesCollection, startAfter(lastVisible), limit(20));
+      const q = query(
+        coursesCollection,
+        orderBy("timestamp", "desc"),
+        startAfter(lastVisible),
+        limit(20)
+      );
       const querySnapshot = await getDocs(q);
 
       const coursesList = querySnapshot.docs.map((doc) => ({

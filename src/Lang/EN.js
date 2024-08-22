@@ -68,7 +68,7 @@ const EN = {
   LoadMore: "Load More",
   RemoveFromWishlist: "Remove from Wishlist",
   YourWishlistIsEmpty: "Your wishlist is empty.",
-  EditYourProfileDetails: "Edit Your Profile Details",
+  EditYourProfileDetails: "Your Profile Details",
   FullName: "Full Name",
   Email: "Email",
   Country: "Country",

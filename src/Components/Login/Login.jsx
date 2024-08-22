@@ -12,7 +12,6 @@ import loginImg from "../../assets/Banner-e-learning-concept-vector-design-remov
 import { useCoursesContext } from "../../Context/CoursesProvider";
 import { useSelector } from "react-redux";
 export default function Login() {
-
   const translate = useSelector((state) => state.language.translation);
 
   const { loginStatus } = useCoursesContext();
@@ -161,8 +160,9 @@ export default function Login() {
             <button
               type="submit"
               disabled={!isValid}
-              className={`mt-3 bg-[#d3a058] hover:bg-[#d3a058da] py-2 px-7 rounded-md text-white font-semibold ${!isValid ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+              className={`mt-3 bg-[#d3a058] hover:bg-[#d3a058da] py-2 px-7 rounded-md text-white font-semibold ${
+                !isValid ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             >
               {translate.Login}
             </button>

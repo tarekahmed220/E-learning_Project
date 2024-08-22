@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 
 import { useSelector } from "react-redux";
 import LanguageSwitcher from "../SwitchLang/LangSwitcher";
+import { useAuth } from "../../Context/AuthContext";
+import Spinner from "../Spinner";
 
 export default function NavBar() {
   const [checklogin, setIsLogin] = useState(false);
@@ -13,6 +15,8 @@ export default function NavBar() {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const wishlistLength = useSelector((state) => state.wishlist.wishlist.length);
+
+  const { isAdmin, loading } = useAuth();
 
   let userName = "";
   if (auth.currentUser) {
@@ -59,6 +63,7 @@ export default function NavBar() {
       toast.error("please login first");
     }
   }
+  if (loading) return <Spinner />;
 
   return (
     <>
@@ -77,7 +82,7 @@ export default function NavBar() {
             {checklogin ? (
               <>
                 <p className="text-amber-700 font-medium me-3">
-                  welcome: {userName}
+                  {userName ? `welcome: ${userName}` : "welcome User"}
                 </p>
                 <div className="profile">
                   <div className="dropdown">
@@ -90,6 +95,7 @@ export default function NavBar() {
                     </button>
                     <div className="dropdown-content">
                       <Link to="/Profile">{translate.EditProfile}</Link>
+                      {isAdmin && <Link to="/admin">Dashbord</Link>}
                       <a className="cursor-pointer" onClick={onLogout}>
                         {translate.Logout}
                       </a>
@@ -147,7 +153,7 @@ export default function NavBar() {
             }`}
             id="mobile-menu-2"
           >
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0 justify-center items-center">
               <li>
                 <NavLink className={getLinkClassName} to="">
                   {translate.Home}

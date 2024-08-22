@@ -1,17 +1,21 @@
-
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
-import { Outlet } from "react-router-dom";
-
+import { Outlet, useLocation } from "react-router-dom";
 
 export default function Layout() {
+  const location = useLocation();
+
+  const noFooterPaths = ["/login", "/signup", "/unauthorized"];
+  const noNavPaths = ["/unauthorized"];
+  const showFooter = !noFooterPaths.includes(location.pathname);
+  const showNav = !noNavPaths.includes(location.pathname);
   return (
     <>
-      <NavBar />
+      {showNav && <NavBar />}
       <div className="">
         <Outlet></Outlet>
       </div>
-      <Footer />
+      {showFooter && <Footer />}
     </>
   );
 }
