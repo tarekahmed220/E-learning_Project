@@ -103,6 +103,10 @@ const EN = {
   Lang: "Lang",
   Arabic: "Arabic",
   English: "English",
+  // profile
+  UpdateUserData: "Data updated successfully.",
+  DeleteAccount: "Delete Account",
+  DeleteAccountDone: "Delete Account Done",
 };
 
 export default EN;

@@ -23,10 +23,12 @@ import CourseDetails from "./Components/ProductDetails/CourseDetails";
 import { store } from "./Redux/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CourseDetailsAdmin from "./Admin/Components/AdminPage/CourseDetailsAdmin";
+
 import { Provider, useSelector } from "react-redux";
 import { AuthProvider } from "./Context/AuthContext";
 import CheckUserRole from "./Components/checkUserRole";
 import Unauthorized from "./Components/Unauthorized";
+
 
 let routers = createBrowserRouter([
   {

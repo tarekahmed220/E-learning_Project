@@ -40,6 +40,7 @@ export default function Profile() {
     city: "",
   });
 
+
   const [originalUserData, setOriginalUserData] = useState({
     fullName: "",
     email: "",
@@ -47,7 +48,9 @@ export default function Profile() {
     country: "",
     city: "",
   });
+
   const [isLoading, setIsLoading] = useState(true);
+
   const [error, setError] = useState({
     fullNameError: "",
     phoneError: "",
@@ -64,6 +67,7 @@ export default function Profile() {
           if (docSnap.exists()) {
             setUserData(docSnap.data());
             setOriginalUserData(docSnap.data());
+
             console.log(docSnap.data());
 
             // تحديث حالة userData بالبيانات المستلمة
@@ -210,6 +214,7 @@ export default function Profile() {
                     pattern="^[a-zA-Z\s]{2,50}$"
                     name="fullName"
                     value={userData.fullName || ""}
+
                     onChange={iconUpdate ? (e) => handleUserData(e) : null}
                   />
                   {error.fullNameError && (
@@ -220,6 +225,7 @@ export default function Profile() {
                 <div className="my-4">
                   <label className="font-bold" htmlFor="">
                     {translate.Email || ""}
+
                   </label>
                   <input
                     className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
@@ -249,6 +255,7 @@ export default function Profile() {
                       className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
                       type="text"
                       value={userData.city || ""}
+
                       readOnly
                     />
                   </div>
@@ -257,10 +264,12 @@ export default function Profile() {
                 <div className="my-4">
                   <label className="font-bold" htmlFor="">
                     {translate.PhoneNumber}
+
                   </label>
                   <input
                     className="focus:outline-none w-full rounded border-solid border-2 border-[#AFAFAF] p-2"
                     type="text"
+
                     name="phone"
                     value={userData.phone || ""}
                     onChange={iconUpdate ? (e) => handleUserData(e) : null}
@@ -299,6 +308,8 @@ export default function Profile() {
                 {/* <button onClick={(e) => handleDeleteAccount(e)} className="bg-[#EFA400] px-4 mt-7 py-1 w-full text-white rounded-md">
                     {translate.DeleteAccount}
                 </button> */}
+
+
               </form>
             </div>
           </div>

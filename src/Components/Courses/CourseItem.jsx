@@ -8,7 +8,9 @@ import { auth, db } from "../../firebase-config";
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 
 function CourseItem({ course }) {
+
   const [isdisable, setisDisable] = useState(false);
+
 
   const translate = useSelector((state) => state.language.translation);
 
@@ -97,6 +99,7 @@ function CourseItem({ course }) {
                   ? "bg-gray-300 cursor-not-allowed"
                   : "bg-amber-600  hover:bg-amber-700"
               } py-1 px-2 text-white text-sm font-medium rounded-md`}
+
             >
               {translate.Enroll}
             </button>

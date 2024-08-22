@@ -96,6 +96,7 @@ export default function Courses() {
     setSearching(true);
     fetchCourses();
   };
+  
 
   return (
     <div className="layout w-full pb-24">
