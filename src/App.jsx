@@ -26,7 +26,7 @@ import CourseDetailsAdmin from "./Admin/Components/AdminPage/CourseDetailsAdmin"
 
 import { Provider, useSelector } from "react-redux";
 import { AuthProvider } from "./Context/AuthContext";
-import CheckUserRole from "./Components/checkUserRole";
+import CheckUserRole from "./Components/checkUserRole.jsx";
 import Unauthorized from "./Components/Unauthorized";
 
 
