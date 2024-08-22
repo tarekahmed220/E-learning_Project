@@ -24,7 +24,9 @@ import { store } from "./Redux/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CourseDetailsAdmin from "./Admin/Components/AdminPage/CourseDetailsAdmin";
 import { Provider, useSelector } from "react-redux";
-// import { IntlProvider } from "react-intl";
+import { AuthProvider } from "./Context/AuthContext";
+import CheckUserRole from "./Components/checkUserRole";
+import Unauthorized from "./Components/Unauthorized";
 
 let routers = createBrowserRouter([
   {
@@ -52,17 +54,28 @@ let routers = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "/register", element: <Register /> },
       { path: "/forgotpassword", element: <ForgotPassword /> },
-      { path: "profile", element: <Profile /> },
+      { path: "/unauthorized", element: <Unauthorized /> },
+      {
+        path: "profile",
+        element: <PrivateRoute />,
+        children: [{ path: "", element: <Profile /> }],
+      },
       { path: "*", element: <Notfound /> },
     ],
   },
   {
     path: "admin",
-    element: <Admin />,
-
+    element: <CheckUserRole />,
     children: [
-      { path: "updatecourse", element: <UpdateCourse /> },
-      { path: "addcourse", element: <AddCourse /> },
+      {
+        path: "",
+        element: <Admin />,
+
+        children: [
+          { path: "updatecourse", element: <UpdateCourse /> },
+          { path: "addcourse", element: <AddCourse /> },
+        ],
+      },
     ],
   },
 ]);
@@ -70,25 +83,27 @@ let query = new QueryClient();
 function App() {
   return (
     <>
-      <QueryClientProvider client={query}>
-        <Provider store={store}>
-          <CoursesProvider>
-            <ToastContainer
-              position="bottom-center"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="dark"
-            />
-            <RouterProvider router={routers}></RouterProvider>
-          </CoursesProvider>
-        </Provider>
-      </QueryClientProvider>
+      <AuthProvider>
+        <QueryClientProvider client={query}>
+          <Provider store={store}>
+            <CoursesProvider>
+              <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+              />
+              <RouterProvider router={routers}></RouterProvider>
+            </CoursesProvider>
+          </Provider>
+        </QueryClientProvider>
+      </AuthProvider>
     </>
   );
 }

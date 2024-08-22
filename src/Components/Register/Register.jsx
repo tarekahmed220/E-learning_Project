@@ -126,7 +126,7 @@ export default function Register() {
       formDataCopy.timestamp = serverTimestamp();
       formDataCopy.role = "user";
       await setDoc(doc(db, "users", user.uid), formDataCopy);
-      navigate("/home");
+      navigate("/");
     } catch (error) {
       console.log(error.code);
       if (error.code === "auth/user-not-found") {

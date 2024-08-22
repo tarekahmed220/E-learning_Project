@@ -4,6 +4,12 @@ import ButtonComponent from "./Components/ButtonComponent";
 import "./home.css";
 
 export default function Home() {
+  if (auth.currentUser) {
+    console.log(auth.currentUser.displayName);
+  } else {
+    console.log("there is no user");
+  }
+
   const items = Array.from({ length: 6 });
   const translate = useSelector((state) => state.language.translation);
   return (
@@ -71,7 +77,7 @@ export default function Home() {
               {translate.p1SectionDetails} <q>{translate.ContectHere}</q>
               {translate.p2SectionDetails}{" "}
             </p>
-            <div className="grid lg:grid-cols-4 grid-cols-2 gap-3 m-auto">
+            <div className="grid lg:grid-cols-4 grid-cols-1 gap-3 m-auto">
               <div className="w-[90%] bg-white p-3 flex gap-3 items-center">
                 <img
                   className="w-14"
@@ -205,44 +211,135 @@ export default function Home() {
               </h2>
               <p>{translate.pSectionSpecial}</p>
             </div>
-            <div className="courses lg:w-5/6 my-16 grid lg:grid-cols-4 grid-cols-2 gap-3">
-              {items.map((_, index) => (
-                <div
-                  key={index}
-                  className="course text-left bg-white p-3 mb-5 rounded"
-                >
-                  <figure className="relative">
-                    <img
-                      className="rounded"
-                      src="../../../public/team-03.jpg"
-                      alt=""
-                    />
-                    <figcaption className="absolute bottom-[-14px] left-1/2 lg:text-sm text-xs translate-x-[-50%] w-2/3 flex justify-center bg-white font-bold px-2 rounded border-2 border-[--colorOrange]">
-                      Graphic Design
-                    </figcaption>
-                  </figure>
-                  <div>
-                    <h4 className="font-bold text-xl mt-4 mb-2">
-                      Fundamentals of Graphic Design
-                    </h4>
-                    <p className="text-[#767676]">By Alex Justin Batler</p>
-                    <span className="text-[#C0C0C0]">
-                      - Oxford Unviersity Of Florida
-                    </span>
-                    <div className="flex justify-between mt-3">
-                      <div className="flex gap-2">
-                        <span className="block w-[25px] h-[25px] bg-[#E8F7FE] rounded-full"></span>
-                        <span>500K+</span>
-                      </div>
+            <div className="courses lg:w-5/6 my-16 grid lg:grid-cols-4 grid-cols-1 gap-3">
+              <div className="course text-left bg-white p-3 mb-5 rounded">
+                <figure className="relative">
+                  <img
+                    className="rounded"
+                    src="../../../public/course1.png"
+                    alt=""
+                  />
+                  <figcaption className="absolute bottom-[-14px] left-1/2 lg:text-sm text-xs translate-x-[-50%] w-2/3 flex justify-center bg-white font-bold px-2 rounded border-2 border-[--colorOrange]">
+                    Graphic Design
+                  </figcaption>
+                </figure>
+                <div>
+                  <h4 className="font-bold text-xl mt-4 mb-2">
+                    Fundamentals of Graphic Design
+                  </h4>
+                  <p className="text-[#767676]">By Alex Justin Batler</p>
+                  <span className="text-[#C0C0C0]">
+                    - Oxford Unviersity Of Florida
+                  </span>
+                  <div className="flex justify-between mt-3">
+                    <div className="flex gap-2">
+                      <span className="block w-[25px] h-[25px] bg-[#E8F7FE] rounded-full"></span>
+                      <span>500K+</span>
+                    </div>
 
-                      <div className="flex gap-2">
-                        <span className="block w-[25px] h-[25px] bg-[#FDF2D6] rounded-full"></span>
-                        <span>4.8</span>
-                      </div>
+                    <div className="flex gap-2">
+                      <span className="block w-[25px] h-[25px] bg-[#FDF2D6] rounded-full"></span>
+                      <span>4.8</span>
                     </div>
                   </div>
                 </div>
-              ))}
+              </div>
+              <div className="course text-left bg-white p-3 mb-5 rounded">
+                <figure className="relative">
+                  <img
+                    className="rounded"
+                    src="../../../public/course2.png"
+                    alt=""
+                  />
+                  <figcaption className="absolute bottom-[-14px] left-1/2 lg:text-sm text-xs translate-x-[-50%] w-2/3 flex justify-center bg-white font-bold px-2 rounded border-2 border-[--colorOrange]">
+                    Graphic Design
+                  </figcaption>
+                </figure>
+                <div>
+                  <h4 className="font-bold text-xl mt-4 mb-2">
+                    Fundamentals of Graphic Design
+                  </h4>
+                  <p className="text-[#767676]">By Alex Justin Batler</p>
+                  <span className="text-[#C0C0C0]">
+                    - Oxford Unviersity Of Florida
+                  </span>
+                  <div className="flex justify-between mt-3">
+                    <div className="flex gap-2">
+                      <span className="block w-[25px] h-[25px] bg-[#E8F7FE] rounded-full"></span>
+                      <span>500K+</span>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <span className="block w-[25px] h-[25px] bg-[#FDF2D6] rounded-full"></span>
+                      <span>4.8</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="course text-left bg-white p-3 mb-5 rounded">
+                <figure className="relative">
+                  <img
+                    className="rounded"
+                    src="../../../public/course3.png"
+                    alt=""
+                  />
+                  <figcaption className="absolute bottom-[-14px] left-1/2 lg:text-sm text-xs translate-x-[-50%] w-2/3 flex justify-center bg-white font-bold px-2 rounded border-2 border-[--colorOrange]">
+                    Graphic Design
+                  </figcaption>
+                </figure>
+                <div>
+                  <h4 className="font-bold text-xl mt-4 mb-2">
+                    Fundamentals of Graphic Design
+                  </h4>
+                  <p className="text-[#767676]">By Alex Justin Batler</p>
+                  <span className="text-[#C0C0C0]">
+                    - Oxford Unviersity Of Florida
+                  </span>
+                  <div className="flex justify-between mt-3">
+                    <div className="flex gap-2">
+                      <span className="block w-[25px] h-[25px] bg-[#E8F7FE] rounded-full"></span>
+                      <span>500K+</span>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <span className="block w-[25px] h-[25px] bg-[#FDF2D6] rounded-full"></span>
+                      <span>4.8</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="course text-left bg-white p-3 mb-5 rounded">
+                <figure className="relative">
+                  <img
+                    className="rounded"
+                    src="../../../public/course4.png"
+                    alt=""
+                  />
+                  <figcaption className="absolute bottom-[-14px] left-1/2 lg:text-sm text-xs translate-x-[-50%] w-2/3 flex justify-center bg-white font-bold px-2 rounded border-2 border-[--colorOrange]">
+                    Graphic Design
+                  </figcaption>
+                </figure>
+                <div>
+                  <h4 className="font-bold text-xl mt-4 mb-2">
+                    Fundamentals of Graphic Design
+                  </h4>
+                  <p className="text-[#767676]">By Alex Justin Batler</p>
+                  <span className="text-[#C0C0C0]">
+                    - Oxford Unviersity Of Florida
+                  </span>
+                  <div className="flex justify-between mt-3">
+                    <div className="flex gap-2">
+                      <span className="block w-[25px] h-[25px] bg-[#E8F7FE] rounded-full"></span>
+                      <span>500K+</span>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <span className="block w-[25px] h-[25px] bg-[#FDF2D6] rounded-full"></span>
+                      <span>4.8</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <ButtonComponent
               fontText="bold"
@@ -262,7 +359,7 @@ export default function Home() {
                 alt=""
               />
               <img
-                className="absolute rounded lg:w-[30%] lg:top-1/2 lg:translate-y-[-50%] lg:right-[130px] w-[60%] top-[60%] translate-y-[-50%] right-[-120px]"
+                className="absolute rounded lg:w-[30%] lg:top-1/2 lg:translate-y-[-50%] lg:right-[130px] w-[60%] top-[60%] translate-y-[-50%] right-[-80px]"
                 src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/e-learning-online-classes-online-distance-design-template-2075ab88e57431859fc3a3f130423696_screen.jpg?ts=1686041965"
                 alt=""
               />
@@ -305,8 +402,8 @@ export default function Home() {
                 {translate.LovedbyOurStudents}
               </h3>
             </div>
-            <div className="lg:flex  justify-center items-center">
-              <div>
+            <div className="lg:flex  justify-evenly items-center ">
+              <div className="lg:w-1/4">
                 <p className="text-2xl">{translate.BrooklynSimmons}</p>
                 <span className="text-[#C0C0C0]">
                   {translate.GraphicDesigner}
@@ -316,9 +413,7 @@ export default function Home() {
               </div>
               <div>
                 <iframe
-                  className="mt-5"
-                  width="560"
-                  height="315"
+                  className="mt-5 w-full lg:w-[120%] h-80"
                   src="https://www.youtube.com/embed/gHXSwOTuseA?si=QzeHE1sJiGyL37f0"
                   title="YouTube video player"
                   frameBorder="0"
@@ -326,47 +421,6 @@ export default function Home() {
                   referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                 ></iframe>
-              </div>
-            </div>
-            <div className="grid grid-cols-3 gap-3 my-8">
-              <div className="w-[90%] bg-white p-3 flex gap-3 items-center rounded">
-                <img
-                  className="w-14 rounded"
-                  src="../../../public/me.jpg"
-                  alt=""
-                />
-                <div className="w-2/3 text-start">
-                  <p className="font-bold">{translate.AhmedTarek}</p>
-                  <span className="text-[#C0C0C0] text-[14px]">
-                    {translate.FullStack}
-                  </span>
-                </div>
-              </div>
-              <div className="w-[90%] bg-white p-3 flex gap-3 items-center">
-                <img
-                  className="w-14 rounded"
-                  src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/451127075_3056737344466334_4670241179713803686_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=XErJz52g5VoQ7kNvgGAP_aA&_nc_ht=scontent-hbe1-1.xx&oh=00_AYCoJ7WNAjYgWBEgnNdZQOy-8VanM13KN0_tvkf-QQsu3Q&oe=66C4D5F8"
-                  alt=""
-                />
-                <div className="w-2/3 text-start">
-                  <p className="font-bold">{translate.TarekAhmed}</p>
-                  <span className="text-[#C0C0C0] text-[14px]">
-                    {translate.FullStack}
-                  </span>
-                </div>
-              </div>
-              <div className="w-[90%] bg-white p-3 flex gap-3 items-center">
-                <img
-                  className="w-14 rounded"
-                  src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/453011807_7875030812584727_2924410436610947275_n.jpg?stp=cp6_dst-jpg&_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=sWQeVJ2VejkQ7kNvgE4v1-g&_nc_ht=scontent-hbe1-1.xx&oh=00_AYA4cUlRFNagZCItkwhMjX49cVBgbcHLfXkmoZIZWMtrtg&oe=66C4E9B7"
-                  alt=""
-                />
-                <div className="w-2/3 text-start">
-                  <p className="font-bold">{translate.MohamedTarek}</p>
-                  <span className="text-[#C0C0C0] text-[14px]">
-                    {translate.FullStack}
-                  </span>
-                </div>
               </div>
             </div>
           </div>
@@ -382,21 +436,6 @@ export default function Home() {
             <p className="text-[#7B7A7F] my-5 m-auto w-1/2">
               {translate.pSectionTrainer}
             </p>
-            <div className="flex justify-center gap-7 my-12">
-              <img
-                className="w-1/4 rounded-2xl"
-                src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/453011807_7875030812584727_2924410436610947275_n.jpg?stp=cp6_dst-jpg&_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=sWQeVJ2VejkQ7kNvgE4v1-g&_nc_ht=scontent-hbe1-1.xx&oh=00_AYA4cUlRFNagZCItkwhMjX49cVBgbcHLfXkmoZIZWMtrtg&oe=66C4E9B7"
-              />
-              <img
-                className="w-1/4 rounded-2xl"
-                src="https://scontent-hbe1-1.xx.fbcdn.net/v/t39.30808-6/451127075_3056737344466334_4670241179713803686_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=XErJz52g5VoQ7kNvgGAP_aA&_nc_ht=scontent-hbe1-1.xx&oh=00_AYCoJ7WNAjYgWBEgnNdZQOy-8VanM13KN0_tvkf-QQsu3Q&oe=66C4D5F8"
-              />
-              <img
-                className="w-1/4 rounded-2xl"
-                src="../../../public/me.jpg"
-                alt=""
-              />
-            </div>
             <div className="my-8">
               <ButtonComponent
                 nameBtn={translate.AllExportMentor}

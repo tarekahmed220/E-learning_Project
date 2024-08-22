@@ -5,7 +5,7 @@ const AR = {
   Logout: "تسجيل خروج",
   Courses: "الدورات",
   ContactUs: "اتصل بنا",
-  EditProfile: "تعديل الاكونت",
+  EditProfile: "تعديل الحساب",
   now: "الان",
   OpenMainMenu: "افتح القائمة الرئيسية",
   MyCourses: "دوراتي",

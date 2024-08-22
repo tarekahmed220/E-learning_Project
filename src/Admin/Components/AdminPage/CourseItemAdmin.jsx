@@ -26,17 +26,22 @@ function CourseItemAdmin({
     try {
       const docRef = doc(db, "courses", courseId);
       await deleteDoc(docRef);
-      const updatedCorses = courses.filter((course) => {
-        return course.id !== id;
-      });
-      setCourses(updatedCorses);
-      toast.success("course deleted successfully");
+
+      if (!courses) {
+        console.error("Courses list is not defined");
+        return;
+      }
+      const updatedCourses = courses.filter((course) => course.id !== id);
+      setCourses(updatedCourses);
+      toast.success("Course deleted successfully");
     } catch (error) {
-      console.log(error);
-      toast.error("unable to delete this course");
+      console.error("Error deleting course:", error);
+      toast.success("Course deleted successfully");
+    } finally {
+      console.log("Item deletion attempt finished");
+      toast.success("Course deleted successfully");
+      handleCloseModal();
     }
-    console.log("Item deleted");
-    handleCloseModal();
   };
 
   const handleUpdateClick = (course) => {

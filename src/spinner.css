@@ -4,6 +4,7 @@
   border-radius: 50%;
   top: 40%;
   left: 50%;
+  z-index: 55;
 
   position: absolute;
   background: conic-gradient(#0000 10%, #e4b714);
