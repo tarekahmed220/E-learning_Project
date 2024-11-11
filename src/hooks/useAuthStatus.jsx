@@ -18,5 +18,6 @@ export function useAuthStatus() {
     });
     return () => unsubscribe();
   }, [setLoginStatus]);
-  return { loginStatus, isLoading };
+  return { loginStatus, isLoading } ;
+
 }
